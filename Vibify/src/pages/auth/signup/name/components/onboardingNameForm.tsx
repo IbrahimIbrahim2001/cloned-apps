@@ -35,7 +35,7 @@ export default function OnboardingNamedForm() {
     const onSubmit = async (formData: OnboardingNameForm) => {
         setData(formData);
         if (email && password && name)
-            signUp(email, password, name, navigate)
+            await signUp(email, password, name, navigate)
     };
     return (
         <Form {...form}>
@@ -56,7 +56,7 @@ export default function OnboardingNamedForm() {
                         </FormItem>
                     )}
                 />
-                <AuthButton text="Sign up" />
+                <AuthButton text="Sign up" isSubmitting={form.formState.isSubmitting} />
             </form>
         </Form>
     )

@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 
-export default function EmailConfirmationPage() {
+export default function ForgetPassword() {
 
     return (
         <div>
+            <p>Enter your email</p>
             <Button type="button">
-                Confirm email
+                send code
             </Button>
         </div>
     )

@@ -7,14 +7,15 @@ import {
     FormMessage
 } from "@/components/ui/form"
 
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { Link, useNavigate } from "react-router"
 import { z } from "zod"
 import AuthButton from "../../components/authButton"
-import supabase from "@/lib/supabase-client"
-import { useNavigate } from "react-router"
-import { toast } from "sonner"
+import { login } from "../api/login"
+import { useUserData } from "@/pages/root/store"
 
 const formSchema = z.object({
     email: z.string().min(2).email("not a valid email"),
@@ -22,6 +23,7 @@ const formSchema = z.object({
 })
 
 export default function LoginForm() {
+    const { setUserData } = useUserData();
     const navigate = useNavigate();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -31,21 +33,8 @@ export default function LoginForm() {
         },
     })
     async function onSubmit(formData: z.infer<typeof formSchema>) {
-        const { data, error } = await supabase.auth.signInWithPassword({ ...formData });
-        if (error) {
-            toast("Error on log in, check your email and password", {
-                style: {
-                    backgroundColor: "var(--popover)",
-                    color: "var(--primary-foreground)",
-                    border: "solid 1px oklch(63.7% 0.237 25.331)"
-                }
-            });
-            return;
-        }
-        if (data) {
-            //useUser with zustand
-            navigate("../home")
-        }
+        const { email, password } = formData;
+        await login(email, password, navigate, setUserData)
     }
     return (
         <>
@@ -79,7 +68,12 @@ export default function LoginForm() {
                             )}
                         />
                     </div>
-                    <AuthButton text="Log in" />
+                    <div className="flex justify-between items-start">
+                        <Link to="../forget-password">
+                            <Button type="button" disabled variant="link" className="text-sm opacity-75 -ml-3">Forget password</Button>
+                        </Link>
+                        <AuthButton text="Log in" isSubmitting={form.formState.isSubmitting} />
+                    </div>
                 </form>
             </Form>
         </>

@@ -2,17 +2,15 @@ import { Button } from "@/components/ui/button";
 import supabase from "@/lib/supabase-client";
 import { useNavigate } from "react-router";
 
-export default function HomePage() {
+export default function SettingsPage() {
     const navigate = useNavigate();
-
-    const handleLogout = async () => {
+    const handleSignout = async () => {
         await supabase.auth.signOut();
         navigate("../")
     }
     return (
         <div>
-            Home
-            <Button type="button" variant="destructive" onClick={handleLogout}>Sign out</Button>
+            <Button variant="destructive" onClick={handleSignout}>Sign out</Button>
         </div>
     )
 }
