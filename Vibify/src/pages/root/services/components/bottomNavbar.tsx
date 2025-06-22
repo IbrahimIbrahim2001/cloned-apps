@@ -32,7 +32,7 @@ const items = [
 
 export default function BottomNavbar() {
     return (
-        <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 flex h-14 w-full items-center justify-around bg-background shadow-[0_-2px_4px_rgba(0,0,0,0.1)] md:h-16">
+        <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 flex h-14 pt-1 w-full items-center justify-around bg-background/80 backdrop-blur-sm shadow-[0_-2px_4px_rgba(0,0,0,0.1)]">
             {items.map((item) => (
                 <LinkElement key={item.title} item={item} />
             ))}

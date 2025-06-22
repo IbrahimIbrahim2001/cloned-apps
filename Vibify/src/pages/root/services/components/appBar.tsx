@@ -1,7 +1,11 @@
-import { BellRing, History, Settings } from "lucide-react"
+import { SidebarTrigger as BaseSidebarTrigger } from "@/components/ui/sidebar"
+import { cn } from "@/lib/utils"
+import { BellRing, History, Menu, Settings } from "lucide-react"
+import type React from "react"
 import { Link, useLocation } from "react-router"
-import { LinkItem } from "../../types/linkItem"
 import ProfileImage from "../../components/profileImage"
+import { LinkItem } from "../../types/linkItem"
+
 
 const items = [
     {
@@ -24,6 +28,15 @@ const items = [
 export default function AppBar() {
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 z-1 bg-background text-muted-foreground flex items-center justify-end px-3 sm:px-5 h-16  dark:bg-gray-950 dark:border-gray-800">
+            <div className="w-full flex item-center">
+                <SidebarTrigger />
+                <div className="md:hidden flex">
+                    <p>logo</p>
+                    <p className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary-foreground bg-clip-text text-transparent animate-gradient-x">
+                        Vibify
+                    </p>
+                </div>
+            </div>
             <nav className="flex items-center space-x-1 sm:space-x-2">
                 {items.map((item) =>
                 (
@@ -49,5 +62,19 @@ function LinkElement({ item }: { item: LinkItem }) {
             <span className="sr-only sm:not-sr-only sm:ml-2 sm:text-sm">{item.title}</span>
             {isActive && <span className="absolute -bottom-px left-0 right-0 h-0.5 bg-primary"></span>}
         </Link>
+    )
+}
+
+
+
+export function SidebarTrigger({ className, ...props }: React.ComponentProps<typeof BaseSidebarTrigger>) {
+    return (
+        <BaseSidebarTrigger
+            className={cn("hidden sm:flex hover:text-primary hover:bg-gray-100 focus:text-primary md:hidden", className)}
+            {...props}
+        >
+            <Menu className="h-5 w-5" />
+            <span className="sr-only">Toggle sidebar</span>
+        </BaseSidebarTrigger>
     )
 }

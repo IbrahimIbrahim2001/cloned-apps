@@ -4,14 +4,16 @@ import {
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
+    SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarRail
 } from "@/components/ui/sidebar"
+import { cn } from "@/lib/utils"
 import { Bookmark, Heart, Home, LibraryBig, Pin, Search } from "lucide-react"
 import { Link, useLocation } from "react-router"
 import { LinkItem } from "../types/linkItem"
-import { cn } from "@/lib/utils"
 
 // Menu items.
 const items = [
@@ -49,10 +51,17 @@ const items = [
 
 export default function AppSidebar() {
     return (
-        <Sidebar className="hidden sm:block text-primary-foreground border-background">
-            <SidebarContent className="px-5 py-3">
+        <Sidebar variant="sidebar" collapsible="icon" className="group hidden sm:flex text-primary-foreground border-background">
+            <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel className="text-2xl text-primary mb-3">Vibify</SidebarGroupLabel>
+                    <SidebarHeader className="px-2">
+                        <SidebarGroupLabel className="text-primary mb-3">
+                            <p>logo</p>
+                            <p className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary-foreground bg-clip-text text-transparent animate-gradient-x">
+                                Vibify
+                            </p>
+                        </SidebarGroupLabel>
+                    </SidebarHeader>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
@@ -62,6 +71,7 @@ export default function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
+            <SidebarRail />
         </Sidebar>
     )
 }
@@ -72,9 +82,12 @@ function LinkElement({ item }: { item: LinkItem }) {
     const isActive = pathname.includes(item.url)
     return (
         <SidebarMenuItem>
-            <SidebarMenuButton asChild className="text-md">
-                <Link to={item.url} className={cn("text-md font-medium text-muted-foreground hover:text-primary focus:text-primary", isActive ? "text-primary" : "text-muted-foreground")}>
-                    <item.icon />
+            <SidebarMenuButton asChild className="text-md  px-3 transition-all group-data-[state=collapsed]:mx-0" tooltip={item.title}>
+                <Link to={item.url} className={cn(
+                    "flex items-center gap-2 font-medium",
+                    isActive ? "text-primary" : "text-muted-foreground hover:text-primary focus:text-primary"
+                )}>
+                    <item.icon className="size-4 shrink-0" />
                     <span>{item.title}</span>
                 </Link>
             </SidebarMenuButton>
