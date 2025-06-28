@@ -13,7 +13,8 @@ import HomePage from "./pages/root/services/Home/home"
 import ServicesLayout from "./pages/root/services/servicesLayout"
 import SettingsPage from "./pages/root/settings/settingsPage"
 import Start from "./pages/start/start"
-import TrackDetailsPage from "./pages/root/trackDetails/trackDetails"
+import TrackDetailsPage from "./pages/root/trackDetails/trackDetailsPage"
+import { LikedTracksPage } from "./pages/root/services/liked tracks/likedTracksPage"
 
 export default function RouterProvider() {
     return (
@@ -37,6 +38,7 @@ export default function RouterProvider() {
                             <Route path="home" element={<HomePage />}>
                                 {/* <Route index element={<HomePage />} /> */}
                             </Route>
+                            <Route path="liked-songs" element={<LikedTracksPage />} />
                         </Route>
                         <Route path="settings" element={<SettingsPage />} />
                         <Route path="track/:name" element={<TrackDetailsPage />} />

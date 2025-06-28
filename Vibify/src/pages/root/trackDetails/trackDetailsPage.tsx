@@ -7,6 +7,8 @@ import { AlbumArt } from "../components/albumArt";
 import { TrackInfo } from "../components/trackInfo"
 import { ProgressBar } from "../components/progressBar"
 import { PlayerControls } from "../components/playerControls"
+import { getImageUrl } from "../utils/getTrackImage"
+import { getTrackTitle } from "../utils/getTrackTitle"
 
 export default function TrackDetailsPage() {
     const { track, isMuted, isPlaying, togglePlay, playNext, playPrevious, playlist } = useMusic()
@@ -21,10 +23,10 @@ export default function TrackDetailsPage() {
         onTrackEnd: playNext,
     })
 
-    const playerControls = usePlayerControls()
+    const playerControls = usePlayerControls({ track })
 
     const handleClose = () => {
-        navigate("../home")
+        navigate(-1)
     }
 
     const handleTogglePlay = () => {
@@ -55,11 +57,11 @@ export default function TrackDetailsPage() {
         <div className="fixed inset-0 z-50 bg-gradient-to-b from-purple-900 via-purple-800 to-gray-900 h-screen flex flex-col text-white">
             <PlayerHeader onClose={handleClose} />
 
-            <AlbumArt artwork={track.artwork["150x150"]} title={track.title} />
+            <AlbumArt artwork={getImageUrl(track)} title={getTrackTitle(track)} />
 
             <TrackInfo
-                title={track.title}
-                artist={track.user.name}
+                track={track}
+                isLikeLoading={playerControls.isLoading}
                 isLiked={playerControls.isLiked}
                 onToggleLike={playerControls.toggleLike}
             />

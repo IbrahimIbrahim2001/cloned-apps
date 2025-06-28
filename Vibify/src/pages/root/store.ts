@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { Track } from "./types/track";
+import { DatabaseTrack, Track } from "./types/track";
 
 
 //user store
@@ -35,15 +35,39 @@ export const useUserData = create(
 );
 
 //------------------------------------------------------------------------------------------------------------------------//
+export type MusicTrack = Track | DatabaseTrack
+
+// Utility functions to normalize access to track properties
+const getTrackId = (track: MusicTrack): string => {
+    return 'id' in track ? track.id : track.track_id
+}
+
+const getTrackTitle = (track: MusicTrack): string => {
+    return 'title' in track ? track.title : track.track_title
+}
+
+const getTrackArtist = (track: MusicTrack): string => {
+    return 'user' in track ? track.user.name : track.track_artist
+}
+
+const getTrackImage = (track: MusicTrack): string => {
+    return 'artwork' in track ? track.artwork["150x150"] : track.track_image
+}
+
+// Helper function to check if two tracks are the same
+const isSameTrack = (track1: MusicTrack, track2: MusicTrack): boolean => {
+    return getTrackId(track1) === getTrackId(track2)
+}
+
 interface MusicState {
     // Current track and playback state
-    track: Track | null
+    track: MusicTrack | null
     isPlaying: boolean
     isMuted: boolean
     isPlayerOpen: boolean
 
     // Playlist management
-    playlist: Track[]
+    playlist: MusicTrack[]
     currentIndex: number
 
     // Player controls
@@ -54,17 +78,23 @@ interface MusicState {
     // Playback controls
     togglePlay: () => void
     toggleMute: () => void
-    setMusic: (track: Track) => void
+    setMusic: (track: MusicTrack) => void
 
     // Navigation controls
     playNext: () => void
     playPrevious: () => void
-    playTrack: (track: Track, playlist?: Track[]) => void
-    setPlaylist: (tracks: Track[], startIndex?: number) => void
+    playTrack: (track: MusicTrack, playlist?: MusicTrack[]) => void
+    setPlaylist: (tracks: MusicTrack[], startIndex?: number) => void
 
     // Playlist management
-    addToPlaylist: (track: Track) => void
+    addToPlaylist: (track: MusicTrack) => void
     removeFromPlaylist: (trackId: string) => void
+
+    // Utility functions (exposed for components to use)
+    getTrackId: (track: MusicTrack) => string
+    getTrackTitle: (track: MusicTrack) => string
+    getTrackArtist: (track: MusicTrack) => string
+    getTrackImage: (track: MusicTrack) => string
 }
 
 export const useMusic = create<MusicState>((set, get) => ({
@@ -88,24 +118,19 @@ export const useMusic = create<MusicState>((set, get) => ({
     toggleMute: () => set((state) => ({ isMuted: !state.isMuted })),
 
     // Set current track (compatible with existing code)
-    setMusic: (track: Track) => {
+    setMusic: (track: MusicTrack) => {
         const { playlist } = get()
-        const trackIndex = playlist.findIndex((t) => t.id === track.id)
+        const trackIndex = playlist.findIndex((t) => isSameTrack(t, track))
 
         // If track is in playlist, update currentIndex
         if (trackIndex >= 0) {
             set({
                 track,
                 currentIndex: trackIndex,
-                isPlaying: true,
             })
         } else {
-            // If track is not in playlist, add it as a single track playlist
             set({
                 track,
-                playlist: [track],
-                currentIndex: 0,
-                isPlaying: true,
             })
         }
     },
@@ -155,9 +180,9 @@ export const useMusic = create<MusicState>((set, get) => ({
     },
 
     // Play specific track
-    playTrack: (track: Track, playlist?: Track[]) => {
+    playTrack: (track: MusicTrack, playlist?: MusicTrack[]) => {
         const currentPlaylist = playlist || get().playlist
-        const trackIndex = currentPlaylist.findIndex((t) => t.id === track.id)
+        const trackIndex = currentPlaylist.findIndex((t) => isSameTrack(t, track))
 
         set({
             track,
@@ -168,7 +193,7 @@ export const useMusic = create<MusicState>((set, get) => ({
     },
 
     // Set playlist
-    setPlaylist: (tracks: Track[], startIndex = 0) => {
+    setPlaylist: (tracks: MusicTrack[], startIndex = 0) => {
         set({
             playlist: tracks,
             currentIndex: startIndex,
@@ -177,10 +202,10 @@ export const useMusic = create<MusicState>((set, get) => ({
     },
 
     // Add track to playlist
-    addToPlaylist: (track: Track) => {
+    addToPlaylist: (track: MusicTrack) => {
         const { playlist } = get()
         // Check if track already exists
-        if (!playlist.find((t) => t.id === track.id)) {
+        if (!playlist.find((t) => isSameTrack(t, track))) {
             set({ playlist: [...playlist, track] })
         }
     },
@@ -188,8 +213,8 @@ export const useMusic = create<MusicState>((set, get) => ({
     // Remove track from playlist
     removeFromPlaylist: (trackId: string) => {
         const { playlist, currentIndex, track } = get()
-        const newPlaylist = playlist.filter((t) => t.id !== trackId)
-        const removedIndex = playlist.findIndex((t) => t.id === trackId)
+        const newPlaylist = playlist.filter((t) => getTrackId(t) !== trackId)
+        const removedIndex = playlist.findIndex((t) => getTrackId(t) === trackId)
 
         let newCurrentIndex = currentIndex
         let newTrack = track
@@ -215,4 +240,10 @@ export const useMusic = create<MusicState>((set, get) => ({
             track: newTrack,
         })
     },
+
+    // Expose utility functions for components
+    getTrackId,
+    getTrackTitle,
+    getTrackArtist,
+    getTrackImage,
 }))

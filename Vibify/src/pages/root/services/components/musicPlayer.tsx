@@ -8,7 +8,6 @@ import { MobilePlayer } from "../components/mobilePlayer"
 
 export default function MusicPlayerHowler() {
     const { track, isMuted, toggleMute, isPlaying, togglePlay, playNext, playPrevious, playlist } = useMusic()
-
     const audioPlayer = useHowlerAudio({
         track,
         isPlaying,

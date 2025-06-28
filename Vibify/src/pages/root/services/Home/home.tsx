@@ -5,7 +5,7 @@ export default function HomePage() {
         <div >
             <Section sectionText="Your Playlist" />
             <Section sectionText="New Releases" />
-            <Section sectionText="New to you" />
+            <Section sectionText="Trending on Audius" />
         </div>
     )
 }

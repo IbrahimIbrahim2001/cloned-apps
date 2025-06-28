@@ -2,10 +2,13 @@ import { Button } from "@/components/ui/button"
 import { SkipBack, SkipForward } from "lucide-react"
 import { Link } from "react-router"
 import { PlayButton } from "./playButton"
-import { Track } from "../../types/track"
+import { DatabaseTrack, Track } from "../../types/track"
+import { getImageUrl } from "../../utils/getTrackImage"
+import { getArtistName } from "../../utils/getTrackArtistName"
+import { getTrackTitle } from "../../utils/getTrackTitle"
 
 interface MobilePlayerProps {
-    track: Track
+    track: Track | DatabaseTrack
     isPlaying: boolean
     isLoading: boolean
     onTogglePlay: () => void
@@ -25,20 +28,23 @@ export function MobilePlayer({
     canGoNext,
     canGoPrevious,
 }: MobilePlayerProps) {
+    const trackTitle = getTrackTitle(track);
+    const trackImage = getImageUrl(track);
+    const trackArtist = getArtistName(track);
     return (
         <div className="md:hidden w-full bg-background/80 backdrop-blur-sm shadow-[0_-2px_4px_rgba(0,0,0,0.1)] text-primary-foreground border-t border-border px-4 flex items-center justify-between h-14">
-            <Link to={`track/${track.title}`}>
+            <Link to={`track/${trackTitle}`}>
                 <div className="flex items-center gap-2 overflow-hidden">
                     <div className="h-8 w-8 rounded-md overflow-hidden bg-muted flex-shrink-0">
                         <img
-                            src={track.artwork["150x150"] || "/placeholder.svg"}
-                            alt={`${track.title} album cover`}
+                            src={trackImage}
+                            alt={`${trackTitle} album cover`}
                             className="h-full w-full object-cover"
                         />
                     </div>
                     <div className="overflow-hidden">
-                        <p className="font-medium text-xs truncate">{track.title}</p>
-                        <p className="text-xs text-muted-foreground truncate">{track.user.name}</p>
+                        <p className="font-medium text-xs truncate">${trackTitle}</p>
+                        <p className="text-xs text-muted-foreground truncate">{trackArtist}</p>
                     </div>
                 </div>
             </Link>

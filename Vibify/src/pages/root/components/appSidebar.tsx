@@ -34,7 +34,7 @@ const items = [
     },
     {
         title: "Liked songs",
-        url: "#",
+        url: "liked-songs",
         icon: Heart,
     },
     {

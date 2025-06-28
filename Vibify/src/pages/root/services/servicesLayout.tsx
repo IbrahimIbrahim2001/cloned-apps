@@ -9,7 +9,7 @@ export default function ServicesLayout() {
             <>
                 <AppBar />
                 <MusicPlayer />
-                <div className='my-8'>
+                <div className='my-8 '>
                     <Outlet />
                 </div>
             </>

@@ -8,3 +8,11 @@ export interface Track {
         name: string
     }
 }
+
+
+export interface DatabaseTrack {
+    track_id: string,
+    track_title: string,
+    track_artist: string,
+    track_image: string
+}

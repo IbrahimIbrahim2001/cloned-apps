@@ -1,4 +1,5 @@
 import { getTrendingTracks } from "./getTrendingTracks";
+import { getUndergroundTrendingTracks } from "./getUndergroundTrendingTracks";
 
 export const handler = (section: string) => {
     switch (section) {
@@ -7,8 +8,8 @@ export const handler = (section: string) => {
         case "Your Playlist":
             //this will fetch data from the supabase database (playlist table)
             return getTrendingTracks();
-        case "New to you":
+        case "Trending on Audius":
             //this will change soon
-            return getTrendingTracks();
+            return getUndergroundTrendingTracks();
     }
 }

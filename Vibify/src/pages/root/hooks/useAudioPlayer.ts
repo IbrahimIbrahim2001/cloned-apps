@@ -1,16 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import { Howl, Howler } from "howler"
-
-interface Track {
-    id: string
-    title: string
-    streamUrl?: string
-    artwork: { "150x150": string }
-    user: { name: string }
-}
+import { DatabaseTrack, Track } from "../types/track"
+import { getTrackId } from "../utils/getTrackId"
 
 interface UseAudioPlayerProps {
-    track: Track | null
+    track: Track | DatabaseTrack | null
     isPlaying: boolean
     isMuted: boolean
     volume?: number
@@ -55,7 +49,7 @@ export function useAudioPlayer({ track, isPlaying, isMuted, volume = 0.7, onTrac
         setDuration(0)
 
         const streamUrl =
-            track.streamUrl || `https://discoveryprovider.audius.co/v1/tracks/${track.id}/stream?app_name=Vibify`
+            `https://discoveryprovider.audius.co/v1/tracks/${getTrackId(track)}/stream?app_name=Vibify`
 
         howlRef.current = new Howl({
             src: [streamUrl],
