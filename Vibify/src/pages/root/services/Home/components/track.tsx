@@ -14,7 +14,7 @@ export default function TrackComponent({ track, onClick }: ClickableTrackProps) 
                 <div className="relative aspect-square w-full overflow-hidden rounded-md  transition-all duration-300 ease-in-out transform group delay-1000  group-hover/card:scale-[1.02]">
                     <img
                         className="h-full w-full object-cover "
-                        src={track.artwork["150x150"] || "/placeholder.svg"}
+                        src={track.artwork["150x150"]}
                         alt={`${track?.id} album cover`}
                     />
                     <PlayButton track={track} />

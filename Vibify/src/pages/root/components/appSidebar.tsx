@@ -44,7 +44,7 @@ const items = [
     },
     {
         title: "your Library",
-        url: "#",
+        url: "your-library",
         icon: LibraryBig,
     },
 ]
@@ -87,7 +87,8 @@ function LinkElement({ item }: { item: LinkItem }) {
                     "flex items-center gap-2 font-medium",
                     isActive ? "text-primary" : "text-muted-foreground hover:text-primary focus:text-primary"
                 )}>
-                    <item.icon className="size-4 shrink-0" />
+
+                    <item.icon className={`size-4 shrink-0 ${(item.title === "Liked songs" && isActive) ? "fill-primary" : null}`} />
                     <span>{item.title}</span>
                 </Link>
             </SidebarMenuButton>

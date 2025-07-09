@@ -42,7 +42,7 @@ export default function Section({ sectionText }: { sectionText: string }) {
 
     return (
         <>
-            <div className="flex items-center justify-between px-3 mb-4">
+            <div className="flex items-center justify-between px-3">
                 <p className="text-xl font-semibold">{sectionText}</p>
                 <div className="flex gap-2">
                     <Button variant="outline" size="sm" onClick={handlePlayAll} className="gap-2">

@@ -118,6 +118,7 @@ export function DesktopPlayer({
                     )}
                 </Button>
                 <Slider value={[volume * 100]} max={100} step={1} className="w-24" onValueChange={onVolumeChange} />
+                {/* <Button onClick={() => console.log("fsaf")} /> */}
             </div>
         </div>
     )

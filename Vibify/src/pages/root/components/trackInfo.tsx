@@ -50,7 +50,6 @@ function LikeButton({ track, isLiked, isLikeLoading, onToggleLike }: TrackInfoPr
 
                 if (error) throw error;
             } else {
-                // Handle unlike functionality
                 await supabase.from("liked_songs")
                     .delete()
                     .eq('user_id', user.id)
@@ -59,12 +58,11 @@ function LikeButton({ track, isLiked, isLikeLoading, onToggleLike }: TrackInfoPr
 
         } catch (error) {
             console.error('Error toggling like:', error);
-            // Show user-friendly error message
         }
     };
     return (
         <>
-            {isLikeLoading ? <LoaderCircle className="animate-spin" /> :
+            {isLikeLoading ? <LoaderCircle className="animate-spin h-6 w-6" /> :
                 <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 ml-4" onClick={handleLike}>
                     <Heart className={`h-6 w-6 ${isLiked ? "fill-red-500 text-red-500" : ""}`} />
                 </Button>

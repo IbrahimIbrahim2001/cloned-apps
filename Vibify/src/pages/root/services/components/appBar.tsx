@@ -9,15 +9,16 @@ import { LinkItem } from "../../types/linkItem"
 
 const items = [
     {
-        title: "History",
-        url: "#",
-        icon: History,
-    },
-    {
         title: "Notifications",
         url: "#",
         icon: BellRing,
     },
+    {
+        title: "History",
+        url: "#",
+        icon: History,
+    },
+
     {
         title: "Settings",
         url: "/settings",

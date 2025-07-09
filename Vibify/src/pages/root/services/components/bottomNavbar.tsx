@@ -24,7 +24,7 @@ const items = [
     // },
     {
         title: "your Library",
-        url: "#",
+        url: "/your-library",
         icon: LibraryBig,
     },
 ]

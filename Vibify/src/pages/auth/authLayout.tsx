@@ -12,7 +12,6 @@ export default function AuthLayout() {
 
     return (
         <div className="w-full h-svh sm:flex items-start sm:justify-center pt-20 sm:pt-32 px-8 sm:px-0">
-
             <Outlet />
         </div>
     )

@@ -16,3 +16,10 @@ export interface DatabaseTrack {
     track_artist: string,
     track_image: string
 }
+
+
+export interface PlaylistType {
+    id: string,
+    title: string,
+    playlist_tracks: DatabaseTrack[]
+}
