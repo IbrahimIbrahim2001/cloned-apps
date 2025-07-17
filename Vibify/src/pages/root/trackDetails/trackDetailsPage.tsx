@@ -1,14 +1,16 @@
-import { useMusic } from "../store"
 import { useNavigate } from "react-router"
+import { AddTrackToPlaylistDialog } from "../components/addTrackToPlaylistDialog"
+import { AlbumArt } from "../components/albumArt"
+import { PlayerHeader } from "../components/albumHeader"
+import { PlayerControls } from "../components/playerControls"
+import { ProgressBar } from "../components/progressBar"
+import { TrackInfo } from "../components/trackInfo"
 import { useAudioPlayer } from "../hooks/useAudioPlayer"
 import { usePlayerControls } from "../hooks/usePlayerControls"
-import { PlayerHeader } from "../components/albumHeader"
-import { AlbumArt } from "../components/albumArt";
-import { TrackInfo } from "../components/trackInfo"
-import { ProgressBar } from "../components/progressBar"
-import { PlayerControls } from "../components/playerControls"
+import { useMusic } from "../store"
 import { getImageUrl } from "../utils/getTrackImage"
 import { getTrackTitle } from "../utils/getTrackTitle"
+
 
 export default function TrackDetailsPage() {
     const { track, isMuted, isPlaying, togglePlay, playNext, playPrevious, playlist } = useMusic()
@@ -54,39 +56,42 @@ export default function TrackDetailsPage() {
     const canGoPrevious = playlist.length > 1
 
     return (
-        <div className="fixed inset-0 z-50 bg-gradient-to-b from-purple-900 via-purple-800 to-gray-900 h-screen flex flex-col text-white">
-            <PlayerHeader onClose={handleClose} />
+        <>
+            <AddTrackToPlaylistDialog />
+            <div className="fixed inset-0 z-40 bg-gradient-to-b from-purple-900 via-purple-800 to-gray-900 h-screen flex flex-col text-white">
+                <PlayerHeader onClose={handleClose} />
 
-            <AlbumArt artwork={getImageUrl(track)} title={getTrackTitle(track)} />
+                <AlbumArt artwork={getImageUrl(track)} title={getTrackTitle(track)} />
 
-            <TrackInfo
-                track={track}
-                isLikeLoading={playerControls.isLoading}
-                isLiked={playerControls.isLiked}
-                onToggleLike={playerControls.toggleLike}
-            />
+                <TrackInfo
+                    track={track}
+                    isLikeLoading={playerControls.isLoading}
+                    isLiked={playerControls.isLiked}
+                    onToggleLike={playerControls.toggleLike}
+                />
 
-            <ProgressBar
-                currentTime={audioPlayer.currentTime}
-                duration={audioPlayer.duration}
-                progressPercentage={audioPlayer.progressPercentage}
-                isLoading={audioPlayer.isLoading}
-                onProgressChange={handleProgressChange}
-            />
+                <ProgressBar
+                    currentTime={audioPlayer.currentTime}
+                    duration={audioPlayer.duration}
+                    progressPercentage={audioPlayer.progressPercentage}
+                    isLoading={audioPlayer.isLoading}
+                    onProgressChange={handleProgressChange}
+                />
 
-            <PlayerControls
-                isPlaying={isPlaying}
-                isLoading={audioPlayer.isLoading}
-                isShuffled={playerControls.isShuffled}
-                isRepeating={playerControls.isRepeating}
-                canGoNext={canGoNext}
-                canGoPrevious={canGoPrevious}
-                onTogglePlay={handleTogglePlay}
-                onNext={playNext}
-                onPrevious={playPrevious}
-                onToggleShuffle={playerControls.toggleShuffle}
-                onToggleRepeat={playerControls.toggleRepeat}
-            />
-        </div>
+                <PlayerControls
+                    isPlaying={isPlaying}
+                    isLoading={audioPlayer.isLoading}
+                    isShuffled={playerControls.isShuffled}
+                    isRepeating={playerControls.isRepeating}
+                    canGoNext={canGoNext}
+                    canGoPrevious={canGoPrevious}
+                    onTogglePlay={handleTogglePlay}
+                    onNext={playNext}
+                    onPrevious={playPrevious}
+                    onToggleShuffle={playerControls.toggleShuffle}
+                    onToggleRepeat={playerControls.toggleRepeat}
+                />
+            </div>
+        </>
     )
 }

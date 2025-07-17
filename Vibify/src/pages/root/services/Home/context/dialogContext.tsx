@@ -1,25 +1,34 @@
 import { createContext, useContext, useState, type ReactNode } from "react"
 
+type DialogType = "createPlaylist" | "addTrack" | null;
+
 interface DialogContextType {
-    dialogState: boolean
-    openDialog: () => void
+    activeDialog: DialogType
+    openDialog: (dialogType: DialogType) => void
     closeDialog: () => void
+    isDialogOpen: (dialogType: DialogType) => boolean
 }
 
 const DialogContext = createContext<DialogContextType | undefined>(undefined);
 
-export default function DialogProvider({ children }: { children: ReactNode }) {
-    const [dialogState, setDialogState] = useState<boolean>(false)
 
-    const openDialog = () => {
-        setDialogState(true)
+export default function DialogProvider({ children }: { children: ReactNode }) {
+    const [activeDialog, setActiveDialog] = useState<DialogType>(null)
+
+    const openDialog = (dialogType: DialogType) => {
+        setActiveDialog(dialogType)
     }
 
     const closeDialog = () => {
-        setDialogState(false)
+        setActiveDialog(null)
     }
+
+    const isDialogOpen = (dialogType: DialogType) => {
+        return activeDialog === dialogType
+    }
+
     return (
-        <DialogContext.Provider value={{ dialogState, openDialog, closeDialog }}>
+        <DialogContext.Provider value={{ activeDialog, openDialog, closeDialog, isDialogOpen }}>
             {children}
         </DialogContext.Provider>
     )

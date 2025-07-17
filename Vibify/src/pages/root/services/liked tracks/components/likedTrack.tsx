@@ -9,7 +9,7 @@ interface LikedTrackProps {
     track: Track
 }
 
-export default function LikedTrack({ track }: LikedTrackProps) {
+export const LikedTrack = ({ track }: LikedTrackProps) => {
     const trackTitle = getTrackTitle(track);
     const trackImage = getImageUrl(track);
     const trackArtist = getArtistName(track);

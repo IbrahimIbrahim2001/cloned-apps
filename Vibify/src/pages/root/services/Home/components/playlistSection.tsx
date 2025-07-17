@@ -1,14 +1,14 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { PlaylistType } from "@/pages/root/types/track";
 import { useMemo } from "react";
-import { useGetTracks } from "../../hooks/useGetTracks";
+import { SectionText, useGetTracks } from "../../hooks/useGetTracks";
 import { usePlaylistStore } from "../../playlists-store";
 import CreatePlaylistCard from "./createPlaylistCard";
 import LikedTracksCard from "./likedTracksCard";
 import Playlist from "./playlist";
 import SkeletonComponent from "./SkeletonComponent";
 
-export default function PlaylistSection({ sectionText }: { sectionText: string }) {
+export default function PlaylistSection({ sectionText }: { sectionText: SectionText }) {
     const { data: playlists, isLoading, error } = useGetTracks(sectionText);
     const optimisticPlaylists = usePlaylistStore((state) => state.optimisticPlaylists)
 

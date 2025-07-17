@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import LikedTrack from "./components/likedTrack";
+import { LikedTrack } from "./components/likedTrack";
 import { useGetLikedTracks } from "./hooks/useGetLikedTracks";
 
 import { SelectTracks } from "./components/selectTracks";

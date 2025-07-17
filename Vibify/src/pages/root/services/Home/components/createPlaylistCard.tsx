@@ -4,7 +4,7 @@ import { useDialog } from "../context/dialogContext";
 export default function CreatePlaylistCard() {
     const { openDialog } = useDialog();
     const handleClick = () => {
-        openDialog();
+        openDialog("createPlaylist")
     }
     return (
         <Card className="text-primary-foreground bg-background w-[170px] border-none relative">

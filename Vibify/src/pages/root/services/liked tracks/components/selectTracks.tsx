@@ -4,9 +4,8 @@ import { DatabaseTrack } from "@/pages/root/types/track";
 import { Trash } from "lucide-react";
 import { useState } from "react";
 import { deleteLikedTracks } from "../api/deleteLikedTracks";
-import LikedTrack from "./likedTrack";
+import { LikedTrack } from "./likedTrack";
 import { useOptimisticTracksStore } from "../store";
-
 
 export const SelectTracks = ({ tracks }: { tracks?: DatabaseTrack[] }) => {
     const [selectedTracks, setSelectTracks] = useState<string[]>([]);

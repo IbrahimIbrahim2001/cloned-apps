@@ -31,7 +31,7 @@ const formSchema = z.object({
 
 
 export default function CreatePlaylistDialog() {
-    const { dialogState, closeDialog } = useDialog();
+    const { isDialogOpen, closeDialog } = useDialog();
     const addOptimisticPlaylist = usePlaylistStore((state) => state.addOptimisticPlaylist)
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -69,7 +69,7 @@ export default function CreatePlaylistDialog() {
     }
 
     return (
-        <Dialog open={dialogState}>
+        <Dialog open={isDialogOpen("createPlaylist")}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader className="text-muted">
                     <DialogTitle>Create playlist</DialogTitle>
