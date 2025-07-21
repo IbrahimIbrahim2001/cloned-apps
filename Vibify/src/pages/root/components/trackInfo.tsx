@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button"
-import supabase from "@/lib/supabase-client"
 import { Heart, LoaderCircle } from "lucide-react"
+import { addNewLikedTrack } from "../services/api/addNewLikedTrack"
 import { DatabaseTrack, Track } from "../types/track"
-import { getArtistName } from "../utils/getTrackArtistName"
-import { getTrackId } from "../utils/getTrackId"
 import { getImageUrl } from "../utils/getTrackImage"
 import { getTrackTitle } from "../utils/getTrackTitle"
 
@@ -35,30 +33,7 @@ function LikeButton({ track, isLiked, isLikeLoading, onToggleLike }: TrackInfoPr
 
     const handleLike = async () => {
         onToggleLike();
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (!user) return;
-
-            if (!isLiked) {
-                const { error } = await supabase.from("liked_songs").insert({
-                    user_id: user.id,
-                    track_id: getTrackId(track),
-                    track_title: getTrackTitle(track),
-                    track_artist: getArtistName(track),
-                    track_image: getImageUrl(track)
-                });
-
-                if (error) throw error;
-            } else {
-                await supabase.from("liked_songs")
-                    .delete()
-                    .eq('user_id', user.id)
-                    .eq('track_id', getTrackId(track));
-            }
-
-        } catch (error) {
-            console.error('Error toggling like:', error);
-        }
+        addNewLikedTrack(isLiked, track);
     };
     return (
         <>

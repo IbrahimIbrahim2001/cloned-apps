@@ -36,14 +36,12 @@ export function PlayerHeader({ onClose }: PlayerHeaderProps) {
 
 function OptionsMenu() {
     const isMobile = useIsMobile()
-    const [drawerOpen, setDrawerOpen] = useState(false) // State for Drawer
-    const [dropdownOpen, setDropdownOpen] = useState(false) // State for DropdownMenu
-
+    const [drawerOpen, setDrawerOpen] = useState(false)
+    const [dropdownOpen, setDropdownOpen] = useState(false)
     const { openDialog } = useDialog()
 
     const handleClick = useCallback(() => {
         openDialog("addTrack")
-        // Explicitly close the Drawer/DropdownMenu when the dialog is opened
         if (isMobile) {
             setDrawerOpen(false)
         } else {

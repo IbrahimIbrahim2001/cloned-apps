@@ -2,18 +2,20 @@ import { PlayCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import type { Track } from "@/pages/root/types/track"
-import { useGetTracks } from "../../hooks/useGetTracks"
+import { SectionText, useGetTracks } from "../../hooks/useGetTracks"
 import { useMusic } from "@/pages/root/store"
 import SkeletonComponent from "./SkeletonComponent"
 import TrackComponent from "./track"
+import { addToHistory } from "../../api/addToHistory"
 
-export default function Section({ sectionText }: { sectionText: string }) {
+export default function Section({ sectionText }: { sectionText: SectionText }) {
     const { data: tracks, isLoading, error } = useGetTracks(sectionText)
     const { playTrack } = useMusic()
 
     const handleTrackClick = (track: Track) => {
         if (!tracks) return
         playTrack(track, tracks)
+        addToHistory(track);
     }
 
     const handlePlayAll = () => {

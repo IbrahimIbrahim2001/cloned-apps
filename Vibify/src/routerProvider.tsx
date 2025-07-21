@@ -18,6 +18,8 @@ import ServicesLayout from "./pages/root/services/servicesLayout"
 import SettingsPage from "./pages/root/settings/settingsPage"
 import TrackDetailsPage from "./pages/root/trackDetails/trackDetailsPage"
 import Start from "./pages/start/start"
+import HistoryPage from "./pages/root/services/history/historyPage"
+import NotificationsPage from "./pages/root/services/notifications/notificationsPage"
 
 export default function RouterProvider() {
     return (
@@ -42,10 +44,14 @@ export default function RouterProvider() {
                             <Route path="liked-songs" element={<LikedTracksPage />} />
                             <Route path="playlists" element={<PlaylistsPage />} />
                             <Route path="playlist/:name" element={<PlaylistPage />} />
+                            <Route path="history" element={<HistoryPage />} />
+                            <Route path="notifications" element={<NotificationsPage />} />
                         </Route>
-                        <Route path="settings" element={<SettingsPage />} />
-                        <Route path="track/:name" element={<TrackDetailsPage />} />
-                        <Route path="your-library" element={<LibraryPage />} />
+                        <> {/* in this section, the UI, the screen displays only the side ,and will not display the navbar and the bottom bar */}
+                            <Route path="settings" element={<SettingsPage />} />
+                            <Route path="track/:name" element={<TrackDetailsPage />} />
+                            <Route path="your-library" element={<LibraryPage />} />
+                        </>
                     </Route>
                 </Route>
                 {/* 404 Page --soon */}

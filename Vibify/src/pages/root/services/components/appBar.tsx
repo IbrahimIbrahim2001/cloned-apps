@@ -10,12 +10,12 @@ import { LinkItem } from "../../types/linkItem"
 const items = [
     {
         title: "Notifications",
-        url: "#",
+        url: "/notifications",
         icon: BellRing,
     },
     {
         title: "History",
-        url: "#",
+        url: "/history",
         icon: History,
     },
 

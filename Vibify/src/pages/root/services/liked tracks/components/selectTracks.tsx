@@ -46,7 +46,7 @@ function DeleteSelectedTracks({ selectedTracks, handleDelete }: { selectedTracks
     return (
         <>
             {selectedTracks && selectedTracks.length > 0 &&
-                <Button onClick={handleDelete} variant="outline" className="border-red-400/80 bg-red-400/80 rounded-full absolute bottom-20 left-1/2 -translate-x-1/2 backdrop-blur-2xl"><Trash />Delete</Button>
+                <Button onClick={handleDelete} variant="outline" className="border-red-400/80 bg-red-400/80 rounded-full fixed bottom-20 left-1/2 -translate-x-1/2 backdrop-blur-2xl"><Trash />Delete</Button>
             }
         </>
     )

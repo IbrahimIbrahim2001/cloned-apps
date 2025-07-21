@@ -8,11 +8,12 @@ interface PlaylistStore {
     addOptimisticPlaylist: (playlist: PlaylistType) => void
     removeOptimisticPlaylist: (id: string) => void
     clearOptimisticAdditions: () => void
+    setOptimisticPlaylists: (playlists: PlaylistType[]) => void
 }
 
 export const usePlaylistStore = create<PlaylistStore>((set) => ({
     optimisticPlaylists: [],
-
+    setOptimisticPlaylists: (playlists) => set({ optimisticPlaylists: playlists }),
     addOptimisticPlaylist: (playlist) =>
         set((state) => ({
             optimisticPlaylists: [...state.optimisticPlaylists, playlist],
