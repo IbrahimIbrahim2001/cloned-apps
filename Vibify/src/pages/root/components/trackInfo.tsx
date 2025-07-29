@@ -39,7 +39,7 @@ function LikeButton({ track, isLiked, isLikeLoading, onToggleLike }: TrackInfoPr
         <>
             {isLikeLoading ? <LoaderCircle className="animate-spin h-6 w-6" /> :
                 <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 ml-4" onClick={handleLike}>
-                    <Heart className={`h-6 w-6 ${isLiked ? "fill-red-500 text-red-500" : ""}`} />
+                    <Heart className={`size-6 ${isLiked ? "fill-red-500 text-red-500" : ""}`} />
                 </Button>
             }
         </>

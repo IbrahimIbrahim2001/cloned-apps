@@ -45,8 +45,6 @@ export const LikedTracksPage = () => {
             <SelectTracks tracks={tracks} />
         </>
     )
-
-
     return (
         <>
             <LikedTracksLayout>

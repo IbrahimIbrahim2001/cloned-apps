@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router"
-import { AddTrackToPlaylistDialog } from "../components/addTrackToPlaylistDialog"
 import { AlbumArt } from "../components/albumArt"
 import { PlayerHeader } from "../components/albumHeader"
 import { PlayerControls } from "../components/playerControls"
@@ -57,7 +56,6 @@ export default function TrackDetailsPage() {
 
     return (
         <>
-            <AddTrackToPlaylistDialog />
             <div className="fixed inset-0 z-40 bg-gradient-to-b from-purple-900 via-purple-800 to-gray-900 h-screen flex flex-col text-white">
                 <PlayerHeader onClose={handleClose} />
 

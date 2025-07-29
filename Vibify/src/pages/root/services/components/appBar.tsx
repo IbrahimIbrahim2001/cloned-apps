@@ -57,10 +57,11 @@ function LinkElement({ item }: { item: LinkItem }) {
         <Link
             key={item.title}
             to={item.url}
-            className="flex items-center justify-center rounded-md p-2 text-sm font-medium transition-colors relative group text-gray-500 hover:text-gray-900 hover:bg-gray-100   focus:text-primary"
+            className={`flex items-center justify-center rounded-md p-2 text-sm font-medium transition-colors relative group text-gray-500 hover:text-gray-900 hover:bg-gray-100  focus:text-primary ${isActive ? "text-primary" : "text-muted-foreground hover:text-primary focus:text-primary"}`}
         >
-            <item.icon className="size-5" />
+            <item.icon className={`size-5 ${isActive && item.title === "Notifications" && "fill-primary"}`} />
             <span className="sr-only sm:not-sr-only sm:ml-2 sm:text-sm">{item.title}</span>
+
             {isActive && <span className="absolute -bottom-px left-0 right-0 h-0.5 bg-primary"></span>}
         </Link>
     )

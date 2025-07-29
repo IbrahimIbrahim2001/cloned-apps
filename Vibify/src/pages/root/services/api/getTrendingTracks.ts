@@ -1,8 +1,9 @@
 import axios from 'axios';
+const AUDIUS_API_BASE_URL = import.meta.env.VITE_AUDIUS_API_BASE_URL
 
 export const getTrendingTracks = async () => {
     try {
-        const response = await axios.get("https://discoveryprovider.audius.co/v1/tracks/trending", {
+        const response = await axios.get(`${AUDIUS_API_BASE_URL}/tracks/trending`, {
         });
         return response.data.data;
 

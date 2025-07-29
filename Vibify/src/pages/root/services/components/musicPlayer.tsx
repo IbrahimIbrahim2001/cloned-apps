@@ -5,9 +5,12 @@ import { usePlayerState } from "../hooks/usePlayerState"
 
 import { DesktopPlayer } from "../components/desktopPlayer"
 import { MobilePlayer } from "../components/mobilePlayer"
+import { addToHistory } from "../api/addToHistory"
+import { useOptimisticHistoryStore } from "../history/store"
 
 export default function MusicPlayerHowler() {
     const { track, isMuted, toggleMute, isPlaying, togglePlay, playNext, playPrevious, playlist } = useMusic()
+    const { optimisticHistory, setOptimisticHistory } = useOptimisticHistoryStore();
     const audioPlayer = useHowlerAudio({
         track,
         isPlaying,
@@ -36,6 +39,23 @@ export default function MusicPlayerHowler() {
         audioPlayer.seekTo(value[0])
     }
 
+    const handleNext = () => {
+        playNext();
+        if (track) {
+            setOptimisticHistory([track, ...optimisticHistory])
+            addToHistory(track)
+        }
+    }
+
+
+    const handlePrevious = () => {
+        playPrevious();
+        if (track) {
+            setOptimisticHistory([track, ...optimisticHistory])
+            addToHistory(track)
+        }
+    }
+
     if (!track) return null
 
     return (
@@ -45,8 +65,8 @@ export default function MusicPlayerHowler() {
                 isPlaying={isPlaying}
                 isLoading={audioPlayer.isLoading}
                 onTogglePlay={handleTogglePlay}
-                onNext={playNext}
-                onPrevious={playPrevious}
+                onNext={handleNext}
+                onPrevious={handlePrevious}
                 canGoNext={playerState.canGoNext}
                 canGoPrevious={playerState.canGoPrevious}
             />
@@ -63,8 +83,8 @@ export default function MusicPlayerHowler() {
                 onTogglePlay={handleTogglePlay}
                 onVolumeChange={handleVolumeChange}
                 onProgressChange={handleProgressChange}
-                onNext={playNext}
-                onPrevious={playPrevious}
+                onNext={handleNext}
+                onPrevious={handlePrevious}
                 canGoNext={playerState.canGoNext}
                 canGoPrevious={playerState.canGoPrevious}
                 formatTime={formatTime}

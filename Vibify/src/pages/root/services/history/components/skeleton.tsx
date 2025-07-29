@@ -1,10 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function Skeleton() {
+export default function Skeleton({ text }: { text?: string }) {
     return (
         <>
             <div className="flex flex-col sm:items-center justify-center p-2 bg-background">
-                <h1 className="text-lg font-bold sm:p-6 sm:text-3xl">Listening History</h1>
+                <h1 className="text-lg font-bold sm:p-6 sm:text-3xl">{text}</h1>
                 <Card className="w-full sm:max-w-md sm:mx-auto bg-background text-muted border-0 sm:bg-card sm:text-card-foreground sm:border-2">
                     <CardContent className="p-0">
                         {Array.from({ length: 5 }).map((_, index) => (
@@ -21,7 +21,6 @@ export default function Skeleton() {
                     </CardContent>
                 </Card>
             </div>
-            )
         </>
     )
 }

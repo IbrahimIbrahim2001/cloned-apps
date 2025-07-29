@@ -58,10 +58,10 @@ function MobileOnlySection({
     return (
         <>
             <div className="grid grid-flow-col auto-cols-[minmax(170px,1fr)] gap-x-3 w-screen sm:hidden overflow-x-scroll no-scrollbar -mx-3 px-6">
-                <LikedTracksCard />
                 {playlists?.map((playlist) => (
                     <Playlist key={playlist.id} playlist={playlist} />
                 ))}
+                <LikedTracksCard />
                 <CreatePlaylistCard />
             </div>
         </>
@@ -85,14 +85,14 @@ function DesktopSection({
             >
                 <CarouselContent className="px-3 group-hover:opacity-100">
                     <>
-                        <CarouselItem className="basis-auto">
-                            <LikedTracksCard />
-                        </CarouselItem>
                         {playlists?.map((playlist, index) => (
                             <CarouselItem key={playlist.id || index} className="basis-auto">
                                 <Playlist playlist={playlist} />
                             </CarouselItem>
                         ))}
+                        <CarouselItem className="basis-auto">
+                            <LikedTracksCard />
+                        </CarouselItem>
                         <CarouselItem className="basis-auto">
                             <CreatePlaylistCard />
                         </CarouselItem>

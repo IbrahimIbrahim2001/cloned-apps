@@ -23,13 +23,13 @@ const items = [
         icon: Home,
     },
     {
-        title: "Pin",
-        url: "#",
+        title: "Pins",
+        url: "pins",
         icon: Pin,
     },
     {
         title: "Saved",
-        url: "#",
+        url: "saved-tracks",
         icon: Bookmark,
     },
     {
@@ -39,7 +39,7 @@ const items = [
     },
     {
         title: "Search",
-        url: "#",
+        url: "search",
         icon: Search,
     },
     {
@@ -80,6 +80,7 @@ export default function AppSidebar() {
 function LinkElement({ item }: { item: LinkItem }) {
     const { pathname } = useLocation()
     const isActive = pathname.includes(item.url)
+    const IconToFill: boolean = item.title === "Liked songs" || item.title === "Saved" || item.title === "Pins"
     return (
         <SidebarMenuItem>
             <SidebarMenuButton asChild className="text-md  px-3 transition-all group-data-[state=collapsed]:mx-0" tooltip={item.title}>
@@ -88,7 +89,7 @@ function LinkElement({ item }: { item: LinkItem }) {
                     isActive ? "text-primary" : "text-muted-foreground hover:text-primary focus:text-primary"
                 )}>
 
-                    <item.icon className={`size-4 shrink-0 ${(item.title === "Liked songs" && isActive) ? "fill-primary" : null}`} />
+                    <item.icon className={`size-4 shrink-0 ${(IconToFill && isActive) ? "fill-primary" : "none"}`} />
                     <span>{item.title}</span>
                 </Link>
             </SidebarMenuButton>

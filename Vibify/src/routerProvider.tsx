@@ -20,6 +20,9 @@ import TrackDetailsPage from "./pages/root/trackDetails/trackDetailsPage"
 import Start from "./pages/start/start"
 import HistoryPage from "./pages/root/services/history/historyPage"
 import NotificationsPage from "./pages/root/services/notifications/notificationsPage"
+import PinsPage from "./pages/root/services/pins/pinsPage"
+import SavedPage from "./pages/root/services/saved/savedPage"
+import SearchPage from "./pages/root/search/searchPage"
 
 export default function RouterProvider() {
     return (
@@ -45,9 +48,12 @@ export default function RouterProvider() {
                             <Route path="playlists" element={<PlaylistsPage />} />
                             <Route path="playlist/:name" element={<PlaylistPage />} />
                             <Route path="history" element={<HistoryPage />} />
+                            <Route path="pins" element={<PinsPage />} />
+                            <Route path="saved-tracks" element={<SavedPage />} />
                             <Route path="notifications" element={<NotificationsPage />} />
                         </Route>
-                        <> {/* in this section, the UI, the screen displays only the side ,and will not display the navbar and the bottom bar */}
+                        <> {/* in this section, the UI,the screen will not display the navbar and the bottom bar */}
+                            <Route path="search" element={<SearchPage />} />
                             <Route path="settings" element={<SettingsPage />} />
                             <Route path="track/:name" element={<TrackDetailsPage />} />
                             <Route path="your-library" element={<LibraryPage />} />

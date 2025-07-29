@@ -1,9 +1,11 @@
 import { useMusic } from "@/pages/root/store";
-import { DatabaseTrack as Track } from "@/pages/root/types/track";
+import { DatabaseTrack, DatabaseTrack as Track } from "@/pages/root/types/track";
 import { getArtistName } from "@/pages/root/utils/getTrackArtistName";
 import { getImageUrl } from "@/pages/root/utils/getTrackImage";
 import { getTrackTitle } from "@/pages/root/utils/getTrackTitle";
 import { Play } from "lucide-react";
+import { addToHistory } from "../../api/addToHistory";
+import { useOptimisticHistoryStore } from "../../history/store";
 
 interface LikedTrackProps {
     track: Track
@@ -34,11 +36,14 @@ export const LikedTrack = ({ track }: LikedTrackProps) => {
 }
 
 
-function PlayButton({ track }: { track: Track }) {
+function PlayButton({ track }: { track: DatabaseTrack }) {
     const { openPlayer, setMusic } = useMusic();
+    const { optimisticHistory, setOptimisticHistory } = useOptimisticHistoryStore();
     const playTrack = () => {
         setMusic(track);
+        setOptimisticHistory([track, ...optimisticHistory])
         openPlayer();
+        addToHistory(track);
     };
     return (
         <>

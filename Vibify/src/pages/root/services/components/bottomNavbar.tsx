@@ -3,9 +3,6 @@ import { Home, LibraryBig, Search } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { LinkItem } from "../../types/linkItem";
 
-
-
-
 const items = [
     {
         title: "Home",
@@ -14,7 +11,7 @@ const items = [
     },
     {
         title: "Search",
-        url: "#",
+        url: "search",
         icon: Search,
     },
     // {

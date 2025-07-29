@@ -5,7 +5,5 @@ export const useGetHistory = () => {
         queryKey: ["history"],
         queryFn: getHistory,
         retry: 2,
-        retryDelay: 1000,
-        staleTime: 5 * 60 * 1000,
     });
 };

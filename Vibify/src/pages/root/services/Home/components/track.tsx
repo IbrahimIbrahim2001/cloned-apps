@@ -2,6 +2,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useMusic } from "@/pages/root/store";
 import { Track } from "@/pages/root/types/track";
 import { Play } from "lucide-react";
+import { useOptimisticHistoryStore } from "../../history/store";
+import { addToHistory } from "../../api/addToHistory";
 interface ClickableTrackProps {
     track: Track
     onClick?: () => void
@@ -35,9 +37,12 @@ export default function TrackComponent({ track, onClick }: ClickableTrackProps) 
 
 function PlayButton({ track }: { track: Track }) {
     const { openPlayer, setMusic } = useMusic();
+    const { optimisticHistory, setOptimisticHistory } = useOptimisticHistoryStore();
     const playTrack = () => {
+        setOptimisticHistory([track, ...optimisticHistory])
         setMusic(track);
         openPlayer();
+        addToHistory(track);
     };
     return (
         <>
