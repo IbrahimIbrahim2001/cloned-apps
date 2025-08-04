@@ -4,6 +4,5 @@ export const useGetPins = () => {
     return useQuery({
         queryKey: ["Pins"],
         queryFn: getPins,
-        retry: 2,
     });
 };

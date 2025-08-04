@@ -12,7 +12,9 @@ import { getTrackTitle } from "../utils/getTrackTitle"
 
 
 export default function TrackDetailsPage() {
-    const { track, isMuted, isPlaying, togglePlay, playNext, playPrevious, playlist } = useMusic()
+    const { track, isMuted, isPlaying, isShuffled,
+        isRepeating, togglePlay, playNext, playPrevious, toggleShuffle,
+        toggleRepeat, playlist } = useMusic()
 
     const navigate = useNavigate()
 
@@ -42,10 +44,15 @@ export default function TrackDetailsPage() {
 
     if (!track) {
         return (
-            <div className="h-screen -my-[64px] bg-gradient-to-b from-primary via-accent to-primary-foreground flex items-center justify-center">
-                <div className="text-white text-center">
-                    <h2 className="text-2xl font-bold mb-2">No Track Selected</h2>
-                    <p className="text-gray-300">Select a track to start playing</p>
+            <div className="h-screen -my-[32px] pt-10 w-full bg-gradient-to-b from-primary via-accent to-primary-foreground ">
+                <div className="sm:hidden">
+                    <PlayerHeader onClose={handleClose} />
+                </div>
+                <div className="flex items-center justify-center">
+                    <div className="text-white text-center">
+                        <h2 className="text-2xl font-bold mb-2">No Track Selected</h2>
+                        <p className="text-gray-300">Select a track to start playing</p>
+                    </div>
                 </div>
             </div>
         )
@@ -79,15 +86,15 @@ export default function TrackDetailsPage() {
                 <PlayerControls
                     isPlaying={isPlaying}
                     isLoading={audioPlayer.isLoading}
-                    isShuffled={playerControls.isShuffled}
-                    isRepeating={playerControls.isRepeating}
+                    isShuffled={isShuffled}
+                    isRepeating={isRepeating}
                     canGoNext={canGoNext}
                     canGoPrevious={canGoPrevious}
                     onTogglePlay={handleTogglePlay}
                     onNext={playNext}
                     onPrevious={playPrevious}
-                    onToggleShuffle={playerControls.toggleShuffle}
-                    onToggleRepeat={playerControls.toggleRepeat}
+                    onToggleShuffle={toggleShuffle}
+                    onToggleRepeat={toggleRepeat}
                 />
             </div>
         </>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { SkipBack, SkipForward } from "lucide-react"
+import { Repeat, Shuffle, SkipBack, SkipForward } from "lucide-react"
 import { Link } from "react-router"
 import { PlayButton } from "./playButton"
 import { DatabaseTrack, Track } from "../../types/track"
@@ -16,6 +16,10 @@ interface MobilePlayerProps {
     onPrevious: () => void
     canGoNext: boolean
     canGoPrevious: boolean
+    isShuffled: boolean
+    isRepeating: boolean
+    onToggleShuffle: () => void
+    onToggleRepeat: () => void
 }
 
 export function MobilePlayer({
@@ -27,6 +31,10 @@ export function MobilePlayer({
     onPrevious,
     canGoNext,
     canGoPrevious,
+    isShuffled,
+    isRepeating,
+    onToggleShuffle,
+    onToggleRepeat,
 }: MobilePlayerProps) {
     const trackTitle = getTrackTitle(track);
     const trackImage = getImageUrl(track);
@@ -48,13 +56,30 @@ export function MobilePlayer({
                     </div>
                 </div>
             </Link>
+
             <div className="flex items-center gap-1">
+                <Button
+                    size="icon"
+                    variant="ghost"
+                    className={`h-8 w-8 ${isShuffled ? "text-green-500" : ""}`}
+                    onClick={onToggleShuffle}
+                >
+                    <Shuffle className="h-4 w-4" />
+                </Button>
                 <Button size="icon" variant="ghost" className="h-8 w-8" onClick={onPrevious} disabled={!canGoPrevious}>
                     <SkipBack className="h-4 w-4" />
                 </Button>
                 <PlayButton isPlaying={isPlaying} isLoading={isLoading} onTogglePlay={onTogglePlay} size="sm" />
                 <Button size="icon" variant="ghost" className="h-8 w-8" onClick={onNext} disabled={!canGoNext}>
                     <SkipForward className="h-4 w-4" />
+                </Button>
+                <Button
+                    size="icon"
+                    variant="ghost"
+                    className={`h-8 w-8 ${isRepeating ? "text-green-500" : ""}`}
+                    onClick={onToggleRepeat}
+                >
+                    <Repeat className="h-4 w-4" />
                 </Button>
             </div>
         </div>

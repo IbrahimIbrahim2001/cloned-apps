@@ -31,7 +31,6 @@ export default function SearchPage() {
         <>
             <PageHeader text={"Search"} />
             <div className="flex flex-col sm:items-center p-2 bg-background">
-                {/* <h1 className="text-lg font-bold sm:p-6 sm:text-3xl">Search Tracks</h1> */}
                 <div className="w-full sm:max-w-md sm:mx-auto mb-4">
                     <Input
                         placeholder="Search for tracks on Audius..."

@@ -5,7 +5,7 @@ export const getPins = async () => {
     const { data } = await supabase.auth.getUser();
     const user_id = data?.user?.id;
     try {
-        const { data, error } = await supabase.from("pins").select().eq("user_id", user_id);
+        const { data, error } = await supabase.from("Pins").select().eq("user_id", user_id);
         if (error) throw error;
         return data as DatabaseTrack[];
     } catch (error) {

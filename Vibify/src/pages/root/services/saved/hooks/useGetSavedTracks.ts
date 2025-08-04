@@ -4,6 +4,5 @@ export const useGetSavedTracks = () => {
     return useQuery({
         queryKey: ["Saved-tracks"],
         queryFn: getSavedTracks,
-        retry: 2,
     });
 };

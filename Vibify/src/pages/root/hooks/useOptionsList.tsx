@@ -21,14 +21,13 @@ interface UseOptionListProps {
 
 
 export function useOptionList({ trackFromHistory }: UseOptionListProps) {
-
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const [trackState, setTrackState] = useState({ isSaved: false, isPined: false })
     const { isSaved, isPined } = trackState
 
     const isMobile = useIsMobile()
-    const { track, isPlaying } = useMusic()
+    const { track, } = useMusic()
     const { openDialog } = useDialog()
 
     const { optimisticHistory, setOptimisticHistory } = useOptimisticHistoryStore()
@@ -143,9 +142,8 @@ export function useOptionList({ trackFromHistory }: UseOptionListProps) {
             id: 6,
             text: "remove from history",
             icon: <Trash2 className="size-5 mt-2" />,
-            disabled: isPlaying,
             onclick: handleRemoveFromHistory,
-            // visible: !!optimisticHistory.map(t => t.id),
+            visible: optimisticHistory?.some((t) => getTrackId(t) === getTrackId(currentTrackForMenu)) ?? false,
         },
     ]
 

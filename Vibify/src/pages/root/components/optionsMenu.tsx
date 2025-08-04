@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import { useOptionList } from "../hooks/useOptionsList";
@@ -11,8 +11,6 @@ export default function OptionsMenu({ trackFromHistory }: { trackFromHistory?: T
         trackFromHistory,
     })
 
-    console.log(optionsList[5].visible)
-
     if (isMobile) return (
         <>
             <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
@@ -22,6 +20,7 @@ export default function OptionsMenu({ trackFromHistory }: { trackFromHistory?: T
                     </Button>
                 </DrawerTrigger>
                 <DrawerContent className="min-h-fit text-muted text-xl px-4 bg-zinc-900">
+                    <DrawerTitle />
                     {optionsList.map((option) => (
                         !option.disabled ?
                             <div key={option.id} className="flex items-center justify-start gap-x-4 h-12" onClick={option.onclick}>
@@ -47,7 +46,7 @@ export default function OptionsMenu({ trackFromHistory }: { trackFromHistory?: T
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="text-muted/90 border-0 w-56 mx-10">
                     {optionsList.map((option) => (
-                        <DropdownMenuItem key={option.id} disabled={option.disabled} hidden={option.disabled && option.text === "remove from history"} className="focus:bg-[#FAFAFA1A] focus:text-muted hover:font-semibold hover:animate-in" onClick={option.onclick}>
+                        <DropdownMenuItem key={option.id} disabled={option.disabled} hidden={option.text === "remove from history" && !option.visible} className="focus:bg-[#FAFAFA1A] focus:text-muted hover:font-semibold hover:animate-in" onClick={option.onclick}>
                             {option.icon}
                             <p>{option.text}</p>
                         </DropdownMenuItem>

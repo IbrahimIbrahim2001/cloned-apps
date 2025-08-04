@@ -7,9 +7,14 @@ import { DesktopPlayer } from "../components/desktopPlayer"
 import { MobilePlayer } from "../components/mobilePlayer"
 import { addToHistory } from "../api/addToHistory"
 import { useOptimisticHistoryStore } from "../history/store"
+import { Button } from "@/components/ui/button"
+import { X } from "lucide-react"
 
 export default function MusicPlayerHowler() {
-    const { track, isMuted, toggleMute, isPlaying, togglePlay, playNext, playPrevious, playlist } = useMusic()
+    const { track, isMuted, toggleMute, isPlaying, togglePlay, playNext, playPrevious, closePlayer, playlist, isShuffled,
+        isRepeating,
+        toggleShuffle,
+        toggleRepeat, } = useMusic()
     const { optimisticHistory, setOptimisticHistory } = useOptimisticHistoryStore();
     const audioPlayer = useHowlerAudio({
         track,
@@ -56,10 +61,19 @@ export default function MusicPlayerHowler() {
         }
     }
 
+    const handleClose = () => {
+        closePlayer()
+    }
+
     if (!track) return null
 
     return (
         <div className="w-full fixed bottom-12 sm:bottom-0 z-10">
+            <div className="flex justify-end sm:justify-start px-4">
+                <Button onClick={handleClose} className="rounded-full mb-2 bg-transparent" variant="outline" size="icon">
+                    <X />
+                </Button>
+            </div>
             <MobilePlayer
                 track={track}
                 isPlaying={isPlaying}
@@ -69,6 +83,10 @@ export default function MusicPlayerHowler() {
                 onPrevious={handlePrevious}
                 canGoNext={playerState.canGoNext}
                 canGoPrevious={playerState.canGoPrevious}
+                isShuffled={isShuffled}
+                isRepeating={isRepeating}
+                onToggleShuffle={toggleShuffle}
+                onToggleRepeat={toggleRepeat}
             />
             <DesktopPlayer
                 track={track}
@@ -88,8 +106,12 @@ export default function MusicPlayerHowler() {
                 canGoNext={playerState.canGoNext}
                 canGoPrevious={playerState.canGoPrevious}
                 formatTime={formatTime}
+                isShuffled={isShuffled}
+                isRepeating={isRepeating}
+                onToggleShuffle={toggleShuffle}
+                onToggleRepeat={toggleRepeat}
             />
-        </div>
+        </div >
     )
 }
 

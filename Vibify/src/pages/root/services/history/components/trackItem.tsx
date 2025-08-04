@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import OptionsMenu from "@/pages/root/components/optionsMenu";
 import { useMusic } from "@/pages/root/store";
 import { DatabaseTrack, Track } from "@/pages/root/types/track";
 import { getImageUrl } from "@/pages/root/utils/getTrackImage";
@@ -7,19 +6,31 @@ import { getTrackTitle } from "@/pages/root/utils/getTrackTitle";
 import { PlayIcon } from "lucide-react";
 import { addToHistory } from "../../api/addToHistory";
 import { useOptimisticHistoryStore } from "../store";
+import { lazy, Suspense } from "react";
+import { useLocation, useNavigate } from "react-router";
+
+
+const LazyOptionMenu = lazy(() => import("@/pages/root/components/optionsMenu"))
 
 export function TrackItem({ track }: { track: DatabaseTrack | Track }) {
     const { openPlayer, setMusic } = useMusic();
     const { optimisticHistory, setOptimisticHistory } = useOptimisticHistoryStore()
+
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
+    const trackImage = getImageUrl(track);
+    const trackTitle = getTrackTitle(track);
+    const trackArtist = getTrackTitle(track);
     const playTrack = () => {
+        if (pathname.includes("search")) {
+            navigate(`../track/${trackTitle}`)
+        }
         setMusic(track);
         openPlayer();
         setOptimisticHistory([track, ...optimisticHistory])
         addToHistory(track)
     };
-    const trackImage = getImageUrl(track);
-    const trackTitle = getTrackTitle(track);
-    const trackArtist = getTrackTitle(track);
+
     return (
         <div className="border-b last:border-0 relative group">
             <div className="flex items-center h-16 w-full sm:p-3 gap-4 transition-colors duration-200 hover:bg-accent/50">
@@ -39,7 +50,9 @@ export function TrackItem({ track }: { track: DatabaseTrack | Track }) {
                         <PlayIcon className="size-5 fill-primary text-primary" />
                         <span className="sr-only">Play track</span>
                     </Button>
-                    <OptionsMenu trackFromHistory={track} />
+                    <Suspense>
+                        <LazyOptionMenu trackFromHistory={track} />
+                    </Suspense>
                 </div>
             </div>
         </div>

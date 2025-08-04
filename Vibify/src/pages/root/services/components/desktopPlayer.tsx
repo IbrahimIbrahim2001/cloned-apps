@@ -26,6 +26,10 @@ interface DesktopPlayerProps {
     canGoNext: boolean
     canGoPrevious: boolean
     formatTime: (time: number) => string
+    isShuffled: boolean
+    isRepeating: boolean
+    onToggleShuffle: () => void
+    onToggleRepeat: () => void
 }
 
 export function DesktopPlayer({
@@ -46,6 +50,10 @@ export function DesktopPlayer({
     canGoNext,
     canGoPrevious,
     formatTime,
+    isShuffled,
+    isRepeating,
+    onToggleShuffle,
+    onToggleRepeat,
 }: DesktopPlayerProps) {
     const trackTitle = getTrackTitle(track);
     const trackImage = getImageUrl(track);
@@ -72,7 +80,10 @@ export function DesktopPlayer({
             {/* Player controls - Center section */}
             <div className="flex-1 flex flex-col items-center justify-center gap-2 max-w-md">
                 <div className="flex items-center justify-center gap-1 md:gap-4">
-                    <Button size="icon" variant="ghost" className="h-8 w-8 hover:bg-white">
+                    <Button
+                        className={`h-8 w-8 hover:bg-white ${isShuffled ? "text-green-500" : ""}`}
+                        onClick={onToggleShuffle}
+                        size="icon" variant="ghost">
                         <Shuffle className="h-4 w-4" />
                     </Button>
                     <Button
@@ -88,7 +99,10 @@ export function DesktopPlayer({
                     <Button size="icon" variant="ghost" className="h-9 w-9 hover:bg-white" onClick={onNext} disabled={!canGoNext}>
                         <SkipForward className="h-5 w-5" />
                     </Button>
-                    <Button size="icon" variant="ghost" className="h-8 w-8 hover:bg-white">
+                    <Button
+                        className={`h-8 w-8 hover:bg-white ${isRepeating ? "text-green-500" : ""}`}
+                        onClick={onToggleRepeat}
+                        size="icon" variant="ghost">
                         <Repeat className="h-4 w-4" />
                     </Button>
                 </div>
@@ -118,7 +132,6 @@ export function DesktopPlayer({
                     )}
                 </Button>
                 <Slider value={[volume * 100]} max={100} step={1} className="w-24" onValueChange={onVolumeChange} />
-                {/* <Button onClick={() => console.log("fsaf")} /> */}
             </div>
         </div>
     )
