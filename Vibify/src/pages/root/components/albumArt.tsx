@@ -1,6 +1,6 @@
 interface AlbumArtProps {
     artwork: string
-    title: string
+    title: string | undefined
 }
 
 export function AlbumArt({ artwork, title }: AlbumArtProps) {

@@ -22,14 +22,10 @@ export default function OptionsMenu({ trackFromHistory }: { trackFromHistory?: T
                 <DrawerContent className="min-h-fit text-muted text-xl px-4 bg-zinc-900">
                     <DrawerTitle />
                     {optionsList.map((option) => (
-                        !option.disabled ?
-                            <div key={option.id} className="flex items-center justify-start gap-x-4 h-12" onClick={option.onclick}>
-                                {option.icon}
-                                <p>{option.text}</p>
-                            </div> : <div hidden={option.text === "remove from history"} key={option.text} className="flex items-center justify-start gap-x-4 h-12 text-muted/40">
-                                {option.icon}
-                                <p>{option.text}</p>
-                            </div>
+                        <div key={option.id} className="flex items-center justify-start gap-x-4 h-12" onClick={option.onclick}>
+                            {option.icon}
+                            <p>{option.text}</p>
+                        </div>
                     ))}
                 </DrawerContent>
             </Drawer>
@@ -46,7 +42,7 @@ export default function OptionsMenu({ trackFromHistory }: { trackFromHistory?: T
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="text-muted/90 border-0 w-56 mx-10">
                     {optionsList.map((option) => (
-                        <DropdownMenuItem key={option.id} disabled={option.disabled} hidden={option.text === "remove from history" && !option.visible} className="focus:bg-[#FAFAFA1A] focus:text-muted hover:font-semibold hover:animate-in" onClick={option.onclick}>
+                        <DropdownMenuItem key={option.id} hidden={option.text === "remove from history" && !option.visible} className="focus:bg-[#FAFAFA1A] focus:text-muted hover:font-semibold hover:animate-in" onClick={option.onclick}>
                             {option.icon}
                             <p>{option.text}</p>
                         </DropdownMenuItem>

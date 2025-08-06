@@ -14,6 +14,10 @@ import { useOptimisticSavedTracksStore } from "../services/saved/store"
 import { useMusic } from "../store"
 import { DatabaseTrack, Track } from "../types/track"
 import { getTrackId } from "../utils/getTrackId"
+import { toast } from "sonner"
+import { getTrackTitle } from "../utils/getTrackTitle"
+import { downloadTrack } from "../api/downloadtrack"
+import { shareTrack } from "../api/shareTrack"
 
 interface UseOptionListProps {
     trackFromHistory?: Track | DatabaseTrack
@@ -107,6 +111,54 @@ export function useOptionList({ trackFromHistory }: UseOptionListProps) {
         }
     }, [currentTrackForMenu, isPined, optimisticPins, setOptimisticPins])
 
+
+    const handleDownload = async () => {
+        if (!currentTrackForMenu) return
+        const trackID = getTrackId(currentTrackForMenu);
+        const trackTitle = getTrackTitle(currentTrackForMenu)
+        toast.success(
+            <span>
+                Downloading <strong>{trackTitle}</strong> to your device.
+            </span>,
+        )
+        try {
+            const audioBlob = await downloadTrack(trackID)
+
+            if (audioBlob) {
+                const url = window.URL.createObjectURL(audioBlob)
+                const a = document.createElement("a")
+                a.href = url
+                a.download = `${trackTitle}.mp3`
+                document.body.appendChild(a)
+                a.click()
+                a.remove()
+                window.URL.revokeObjectURL(url)
+
+                toast.success(
+                    <span>
+                        Downloaded <strong>{trackTitle}</strong> Successfully.
+                    </span>,
+                )
+            } else {
+                toast.error("No audio data received for download.")
+            }
+        } catch (err: unknown) {
+            console.log(err)
+            toast.error(`Failed to download track: ${trackTitle}`)
+        }
+    }
+
+
+    const handleShare = () => {
+        const trackTitle = getTrackTitle(currentTrackForMenu);
+        toast.success("Copied successfully")
+        shareTrack(trackTitle)
+
+
+    }
+
+
+
     const optionsList = [
         {
             id: 1,
@@ -130,13 +182,13 @@ export function useOptionList({ trackFromHistory }: UseOptionListProps) {
             id: 4,
             text: "download",
             icon: <Download className="size-5 mt-2" />,
-            disabled: true,
+            onclick: handleDownload,
         },
         {
             id: 5,
             text: "Share",
             icon: <Forward className="size-5 mt-2" />,
-            disabled: true,
+            onclick: handleShare,
         },
         {
             id: 6,
