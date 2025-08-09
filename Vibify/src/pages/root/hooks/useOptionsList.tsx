@@ -16,8 +16,8 @@ import { DatabaseTrack, Track } from "../types/track"
 import { getTrackId } from "../utils/getTrackId"
 import { toast } from "sonner"
 import { getTrackTitle } from "../utils/getTrackTitle"
-import { downloadTrack } from "../api/downloadtrack"
 import { shareTrack } from "../api/shareTrack"
+import { downloadTrack } from "../api/downloadTrack"
 
 interface UseOptionListProps {
     trackFromHistory?: Track | DatabaseTrack

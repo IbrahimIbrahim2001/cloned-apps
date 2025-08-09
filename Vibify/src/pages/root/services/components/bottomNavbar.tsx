@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Home, LibraryBig, Search } from "lucide-react";
+import { Home, LibraryBig, Search, Sparkles } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { LinkItem } from "../../types/linkItem";
 
@@ -14,11 +14,11 @@ const items = [
         url: "search",
         icon: Search,
     },
-    // {
-    //     title: "Discover",
-    //     url: "#",
-    //     icon: Sparkles
-    // },
+    {
+        title: "Explore",
+        url: "recommend",
+        icon: Sparkles
+    },
     {
         title: "your Library",
         url: "/your-library",

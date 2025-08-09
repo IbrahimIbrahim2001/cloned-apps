@@ -11,9 +11,10 @@ import {
     SidebarRail
 } from "@/components/ui/sidebar"
 import { cn } from "@/lib/utils"
-import { Bookmark, Heart, Home, LibraryBig, Pin, Search } from "lucide-react"
+import { Bookmark, Heart, Home, LibraryBig, Pin, Search, Sparkle } from "lucide-react"
 import { Link, useLocation } from "react-router"
 import { LinkItem } from "../types/linkItem"
+
 
 // Menu items.
 const items = [
@@ -41,6 +42,12 @@ const items = [
         title: "Search",
         url: "search",
         icon: Search,
+    },
+    {
+        title: "Explore with AI",
+        url: "recommend",
+        icon: Sparkle
+
     },
     {
         title: "your Library",

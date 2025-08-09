@@ -3,6 +3,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useMusic } from "@/pages/root/store"
 import type { Track } from "@/pages/root/types/track"
 import { PlayCircle } from "lucide-react"
+import { toast } from "sonner"
 import { addToHistory } from "../../api/addToHistory"
 import { SectionText, useGetTracks } from "../../hooks/useGetTracks"
 import SkeletonComponent from "./SkeletonComponent"
@@ -25,10 +26,13 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
     }
 
     if (error) {
+        toast.error("Please, use VPN if you are on Syria")
         return (
-            <div className="p-4">
-                <p className="text-destructive">Error loading {sectionText}</p>
-            </div>
+            <>
+                <div className="p-4">
+                    <p className="text-destructive">Error loading {sectionText}</p>
+                </div>
+            </>
         )
     }
 

@@ -23,6 +23,7 @@ import NotificationsPage from "./pages/root/services/notifications/notifications
 import PinsPage from "./pages/root/services/pins/pinsPage"
 import SavedPage from "./pages/root/services/saved/savedPage"
 import SearchPage from "./pages/root/search/searchPage"
+import RecommendPage from "./pages/root/services/recommend/recommendPage"
 
 export default function RouterProvider() {
     return (
@@ -51,6 +52,7 @@ export default function RouterProvider() {
                             <Route path="pins" element={<PinsPage />} />
                             <Route path="saved-tracks" element={<SavedPage />} />
                             <Route path="notifications" element={<NotificationsPage />} />
+                            <Route path="recommend" element={<RecommendPage />} />
                         </Route>
                         <> {/* in this section, the UI,the screen will not display the navbar and the bottom bar */}
                             <Route path="search" element={<SearchPage />} />
