@@ -26,7 +26,7 @@ export default function SavedPage() {
                             optimisticSavedTracks.map((track) => <TrackItem key={getTrackId(track)} track={track} />)
                         ) : (
                             <div className="p-6 text-center text-muted-foreground">
-                                No listening history found. Start playing some music!
+                                No saved tracks found. Start playing some music!
                             </div>
                         )}
                     </CardContent>

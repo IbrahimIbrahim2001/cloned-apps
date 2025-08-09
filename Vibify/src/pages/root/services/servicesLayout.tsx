@@ -16,6 +16,6 @@ export default function ServicesLayout() {
                 </div>
             </>
             <BottomNavbar />
-        </>
+        </ >
     )
 }

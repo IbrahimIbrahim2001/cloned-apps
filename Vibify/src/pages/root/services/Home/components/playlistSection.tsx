@@ -33,10 +33,6 @@ export default function PlaylistSection({ sectionText }: { sectionText: SectionT
         )
     }
 
-
-
-
-
     return (
         <>
             <div className="flex items-center justify-between px-3">

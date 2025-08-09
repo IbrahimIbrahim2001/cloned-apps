@@ -27,7 +27,7 @@ export default function PinsPage() {
                             optimisticPins.map((track) => <TrackItem key={getTrackId(track)} track={track} />)
                         ) : (
                             <div className="p-6 text-center text-muted-foreground">
-                                No listening history found. Start playing some music!
+                                No pins found. Start playing some music!
                             </div>
                         )}
                     </CardContent>

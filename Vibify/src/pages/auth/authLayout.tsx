@@ -1,3 +1,4 @@
+import VibifyLogo from "@/components/shared/vibifyLogo";
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 
@@ -11,8 +12,13 @@ export default function AuthLayout() {
     }, [pathname, navigate]);
 
     return (
-        <div className="w-full h-svh sm:flex items-start sm:justify-center pt-20 sm:pt-32 px-8 sm:px-0">
-            <Outlet />
+        <div className="relative w-full h-svh flex items-start sm:justify-center">
+            <div className="absolute inset-0  flex items-center justify-center z-0 opacity-10">
+                <VibifyLogo width="300" height="300" />
+            </div>
+            <div className="w-full h-svh z-10 sm:flex items-start sm:justify-center pt-20 sm:pt-32 px-8 sm:px-0">
+                <Outlet />
+            </div>
         </div>
     )
 }

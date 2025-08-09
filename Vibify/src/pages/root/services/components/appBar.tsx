@@ -5,6 +5,7 @@ import type React from "react"
 import { Link, useLocation } from "react-router"
 import ProfileImage from "../../components/profileImage"
 import { LinkItem } from "../../types/linkItem"
+import VibifyLogo from "@/components/shared/vibifyLogo"
 
 
 const items = [
@@ -32,7 +33,7 @@ export default function AppBar() {
             <div className="w-full flex item-center">
                 <SidebarTrigger />
                 <div className="md:hidden flex">
-                    <p>logo</p>
+                    <VibifyLogo width="30" height="30" />
                     <p className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary-foreground bg-clip-text text-transparent animate-gradient-x">
                         Vibify
                     </p>

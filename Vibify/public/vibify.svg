@@ -1,0 +1,10 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="28" fill="oklch(0.58 0.25 288.25)"/>
+  <!-- Sound wave bars -->
+  <rect x="32" y="50" width="10" height="20" rx="5" fill="oklch(0.985 0 0)"/>
+  <rect x="50" y="40" width="10" height="40" rx="5" fill="oklch(0.985 0 0)"/>
+  <rect x="68" y="55" width="10" height="15" rx="5" fill="oklch(0.985 0 0)"/>
+  <rect x="86" y="45" width="10" height="30" rx="5" fill="oklch(0.985 0 0)"/>
+  <!-- Optional: Add a subtle circle for a modern touch -->
+  <circle cx="60" cy="60" r="48" stroke="oklch(0.985 0 0)" stroke-width="2" opacity="0.08"/>
+</svg>
