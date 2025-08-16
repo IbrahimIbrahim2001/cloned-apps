@@ -15,6 +15,7 @@ import { Bookmark, Heart, Home, LibraryBig, Pin, Search, Sparkle } from "lucide-
 import { Link, useLocation } from "react-router"
 import { LinkItem } from "../types/linkItem"
 import VibifyLogo from "@/components/shared/vibifyLogo"
+import { useTranslation } from "react-i18next"
 
 
 // Menu items.
@@ -51,7 +52,7 @@ const items = [
 
     },
     {
-        title: "your Library",
+        title: "Your library",
         url: "your-library",
         icon: LibraryBig,
     },
@@ -92,6 +93,8 @@ function LinkElement({ item }: { item: LinkItem }) {
     const { pathname } = useLocation()
     const isActive = pathname.includes(item.url)
     const IconToFill: boolean = item.title === "Liked songs" || item.title === "Saved" || item.title === "Pins"
+    const { t } = useTranslation();
+
     return (
         <SidebarMenuItem>
             <SidebarMenuButton asChild className="text-md  px-3 transition-all group-data-[state=collapsed]:mx-0" tooltip={item.title}>
@@ -101,7 +104,7 @@ function LinkElement({ item }: { item: LinkItem }) {
                 )}>
 
                     <item.icon className={`size-4 shrink-0 ${(IconToFill && isActive) ? "fill-primary" : "none"}`} />
-                    <span>{item.title}</span>
+                    <span>{t(item.title)}</span>
                 </Link>
             </SidebarMenuButton>
         </SidebarMenuItem>

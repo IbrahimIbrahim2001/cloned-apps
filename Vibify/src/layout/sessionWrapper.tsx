@@ -60,9 +60,9 @@ export default function SessionWrapper() {
                             cy="40"
                             r="32"
                             stroke="oklch(0.58 0.25 288.25)"
-                            stroke-width="8"
-                            stroke-dasharray="50 100"
-                            stroke-linecap="round"
+                            strokeWidth="8"
+                            strokeDasharray="50 100"
+                            strokeLinecap="round"
                         >
                             <animateTransform
                                 attributeName="transform"

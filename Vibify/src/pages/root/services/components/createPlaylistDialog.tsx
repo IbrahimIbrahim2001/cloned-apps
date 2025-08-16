@@ -19,6 +19,7 @@ import { PlaylistType } from "../../types/track"
 import { createPlaylist } from "../api/createPlaylist"
 import { useDialog } from "../Home/context/dialogContext"
 import { usePlaylistStore } from "../playlists-store"
+import { useTranslation } from "react-i18next"
 
 const formSchema = z.object({
     title: z
@@ -33,6 +34,7 @@ const formSchema = z.object({
 export default function CreatePlaylistDialog() {
     const { isDialogOpen, closeDialog } = useDialog();
     const addOptimisticPlaylist = usePlaylistStore((state) => state.addOptimisticPlaylist)
+    const { t } = useTranslation();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -72,7 +74,7 @@ export default function CreatePlaylistDialog() {
         <Dialog open={isDialogOpen("createPlaylist")}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader className="text-muted">
-                    <DialogTitle>Create playlist</DialogTitle>
+                    <DialogTitle>{t("Create playlist")}</DialogTitle>
                     <DialogDescription>
                         <div className="flex gap-x-2 items-center">
                             Make sure to add some Tracks <Music className="size-4" />
@@ -104,7 +106,7 @@ export default function CreatePlaylistDialog() {
                                     onClick={handleCancel}
                                     disabled={form.formState.isSubmitting}
                                 >
-                                    Cancel
+                                    {t("Cancel")}
                                 </Button>
                             </DialogClose>
                             <Button type="submit" disabled={form.formState.isSubmitting}>
@@ -114,7 +116,7 @@ export default function CreatePlaylistDialog() {
                                         Creating...
                                     </>
                                 ) : (
-                                    "Create"
+                                    t("Create")
                                 )}
                             </Button>
                         </DialogFooter>

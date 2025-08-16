@@ -7,11 +7,12 @@ import CreatePlaylistCard from "./createPlaylistCard";
 import LikedTracksCard from "./likedTracksCard";
 import Playlist from "./playlist";
 import SkeletonComponent from "./SkeletonComponent";
+import { useTranslation } from "react-i18next";
 
 export default function PlaylistSection({ sectionText }: { sectionText: SectionText }) {
     const { data: playlists, isLoading, error } = useGetTracks(sectionText);
     const optimisticPlaylists = usePlaylistStore((state) => state.optimisticPlaylists)
-
+    const { t } = useTranslation();
     const allPlaylists = useMemo(() => {
         if (!playlists) return optimisticPlaylists
         return [...playlists, ...optimisticPlaylists]
@@ -19,7 +20,7 @@ export default function PlaylistSection({ sectionText }: { sectionText: SectionT
     if (error) {
         return (
             <div className="p-4">
-                <p className="text-destructive">Error loading {sectionText}</p>
+                <p className="text-destructive">Error loading {t(sectionText)}</p>
             </div>
         )
     }
@@ -27,7 +28,7 @@ export default function PlaylistSection({ sectionText }: { sectionText: SectionT
     if (isLoading) {
         return (
             <>
-                <p className="text-xl px-3">{sectionText}</p>
+                <p className="text-xl px-3">{t(sectionText)}</p>
                 <SkeletonComponent />
             </>
         )
@@ -36,7 +37,7 @@ export default function PlaylistSection({ sectionText }: { sectionText: SectionT
     return (
         <>
             <div className="flex items-center justify-between px-3">
-                <p className="text-xl font-semibold">{sectionText}</p>
+                <p className="text-xl font-semibold">{t(sectionText)}</p>
             </div>
             <MobileOnlySection playlists={allPlaylists} />
             <DesktopSection playlists={allPlaylists} />

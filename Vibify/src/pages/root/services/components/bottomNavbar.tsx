@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Home, LibraryBig, Search, Sparkles } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { LinkItem } from "../../types/linkItem";
+import { useTranslation } from "react-i18next";
 
 const items = [
     {
@@ -20,7 +21,7 @@ const items = [
         icon: Sparkles
     },
     {
-        title: "your Library",
+        title: "Your library",
         url: "/your-library",
         icon: LibraryBig,
     },
@@ -41,13 +42,14 @@ export default function BottomNavbar() {
 function LinkElement({ item }: { item: LinkItem }) {
     const { pathname } = useLocation()
     const isActive = pathname.includes(item.url)
+    const { t } = useTranslation();
     return (
         <Link
             to={item.url}
             className={cn("flex flex-col items-center justify-center gap-1 text-sm font-medium hover:text-primary focus:text-primary", isActive ? "text-primary" : "text-muted-foreground")}
         >
             <item.icon className="h-6 w-6" />
-            {item.title}
+            {t(item.title)}
         </Link>
     )
 }

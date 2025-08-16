@@ -4,12 +4,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { MoreHorizontal } from "lucide-react";
 import { useOptionList } from "../hooks/useOptionsList";
 import { DatabaseTrack, Track } from "../types/track";
+import { useTranslation } from "react-i18next";
 
 // added  trackFromHistory cause you might want to remove a track from the history list and not currently playing
 export default function OptionsMenu({ trackFromHistory }: { trackFromHistory?: Track | DatabaseTrack }) {
     const { drawerOpen, setDrawerOpen, dropdownOpen, setDropdownOpen, isMobile, optionsList } = useOptionList({
         trackFromHistory,
     })
+
+    const { t } = useTranslation();
 
     if (isMobile) return (
         <>
@@ -24,7 +27,7 @@ export default function OptionsMenu({ trackFromHistory }: { trackFromHistory?: T
                     {optionsList.map((option) => (
                         <div key={option.id} className="flex items-center justify-start gap-x-4 h-12" onClick={option.onclick}>
                             {option.icon}
-                            <p>{option.text}</p>
+                            <p>{t(option.text)}</p>
                         </div>
                     ))}
                 </DrawerContent>
@@ -44,7 +47,7 @@ export default function OptionsMenu({ trackFromHistory }: { trackFromHistory?: T
                     {optionsList.map((option) => (
                         <DropdownMenuItem key={option.id} hidden={option.text === "remove from history" && !option.visible} className="focus:bg-[#FAFAFA1A] focus:text-muted hover:font-semibold hover:animate-in" onClick={option.onclick}>
                             {option.icon}
-                            <p>{option.text}</p>
+                            <p>{t(option.text)}</p>
                         </DropdownMenuItem>
                     ))}
                 </DropdownMenuContent>

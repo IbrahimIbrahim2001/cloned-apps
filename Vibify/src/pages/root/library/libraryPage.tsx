@@ -5,34 +5,36 @@ import { useGetTracks } from "../services/hooks/useGetTracks";
 import { useGetLikedTracks } from "../services/liked tracks/hooks/useGetLikedTracks";
 import { useGetPins } from "../services/pins/hooks/useGetPins";
 import { useGetSavedTracks } from "../services/saved/hooks/useGetSavedTracks";
+import { useTranslation } from "react-i18next";
 export default function LibraryPage() {
     const { data: playlists } = useGetTracks("Your Playlists");
     const { data: tracks } = useGetLikedTracks();
     const { data: pins } = useGetPins();
     const { data: savedTracks } = useGetSavedTracks();
+    const { t } = useTranslation();
     return (
         <>
-            <PageHeader text="Your Library" />
+            <PageHeader text={t("Your library")} />
             <div className="sm:pt-10 -my-3">
-                <p className="text-xl font-bold mb-3 hidden sm:block">Your Library:</p>
+                <p className="text-xl font-bold mb-3 hidden sm:block">{t("Your library")}:</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 space-x-3 sm:space-y-3">
-                    <CardSection title="Liked Songs" number={tracks?.length} itemType="track" href="/liked-songs" Icon={Heart} />
+                    <CardSection title={t("Liked songs")} number={tracks?.length} itemType="track" href="/liked-songs" Icon={Heart} />
                     <CardSection
-                        title="Your Playlists"
+                        title={t("Your Playlists")}
                         number={playlists?.length}
                         itemType="playlist"
                         href="/playlists"
                         Icon={ListMusic}
                     />
                     <CardSection
-                        title="Saved Tracks"
+                        title={t("Saved tracks")}
                         number={savedTracks?.length}
                         itemType="track"
                         href="/saved-tracks"
                         Icon={Bookmark}
                     />
                     <CardSection
-                        title="Pins"
+                        title={t("Pins")}
                         number={pins?.length}
                         itemType="pin"
                         href="/pins"

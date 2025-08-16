@@ -8,12 +8,12 @@ import { addToHistory } from "../../api/addToHistory"
 import { SectionText, useGetTracks } from "../../hooks/useGetTracks"
 import SkeletonComponent from "./SkeletonComponent"
 import TrackComponent from "./track"
+import { useTranslation } from "react-i18next"
 
 export default function Section({ sectionText }: { sectionText: SectionText }) {
     const { data: tracks, isLoading, error } = useGetTracks(sectionText)
     const { playTrack } = useMusic()
-
-
+    const { t } = useTranslation();
     const handleTrackClick = (track: Track) => {
         if (!tracks) return
         playTrack(track, tracks)
@@ -30,7 +30,7 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
         return (
             <>
                 <div className="p-4">
-                    <p className="text-destructive">Error loading {sectionText}</p>
+                    <p className="text-destructive">Error loading {t(sectionText)}</p>
                 </div>
             </>
         )
@@ -39,7 +39,7 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
     if (isLoading) {
         return (
             <>
-                <p className="text-xl px-3">{sectionText}</p>
+                <p className="text-xl px-3">{t(sectionText)}</p>
                 <SkeletonComponent />
             </>
         )
@@ -50,7 +50,7 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
     return (
         <>
             <div className="flex items-center justify-between px-3">
-                <p className="text-xl font-semibold">{sectionText}</p>
+                <p className="text-xl font-semibold">{t(sectionText)}</p>
                 <div className="flex gap-2">
                     <Button variant="outline" size="sm" onClick={handlePlayAll} className="gap-2">
                         <PlayCircle className="w-4 h-4" />
