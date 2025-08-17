@@ -60,8 +60,10 @@ const items = [
 
 export default function AppSidebar() {
     const { state } = useSidebar()
+    const { i18n } = useTranslation();
+    const isArabic = i18n.language === 'ar';
     return (
-        <Sidebar variant="sidebar" collapsible="icon" className="group hidden sm:flex text-primary-foreground border-background">
+        <Sidebar side={isArabic ? "right" : "left"} variant="sidebar" collapsible="icon" className="group hidden sm:flex text-primary-foreground border-background">
             <SidebarHeader className="px-2">
                 <div className="flex items-center gap-2">
                     <VibifyLogo width="30" height="30" />

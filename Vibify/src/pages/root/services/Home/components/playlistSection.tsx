@@ -12,14 +12,15 @@ import { useTranslation } from "react-i18next";
 export default function PlaylistSection({ sectionText }: { sectionText: SectionText }) {
     const { data: playlists, isLoading, error } = useGetTracks(sectionText);
     const optimisticPlaylists = usePlaylistStore((state) => state.optimisticPlaylists)
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const isArabic = i18n.language === 'ar';
     const allPlaylists = useMemo(() => {
         if (!playlists) return optimisticPlaylists
         return [...playlists, ...optimisticPlaylists]
     }, [playlists, optimisticPlaylists])
     if (error) {
         return (
-            <div className="p-4">
+            <div dir={isArabic ? "rtl" : "ltr"} className="p-4">
                 <p className="text-destructive">Error loading {t(sectionText)}</p>
             </div>
         )
@@ -28,7 +29,7 @@ export default function PlaylistSection({ sectionText }: { sectionText: SectionT
     if (isLoading) {
         return (
             <>
-                <p className="text-xl px-3">{t(sectionText)}</p>
+                <p dir={isArabic ? "rtl" : "ltr"} className="text-xl px-3">{t(sectionText)}</p>
                 <SkeletonComponent />
             </>
         )
@@ -36,11 +37,11 @@ export default function PlaylistSection({ sectionText }: { sectionText: SectionT
 
     return (
         <>
-            <div className="flex items-center justify-between px-3">
+            <div dir={isArabic ? "rtl" : "ltr"} className="flex items-center justify-between px-3">
                 <p className="text-xl font-semibold">{t(sectionText)}</p>
             </div>
-            <MobileOnlySection playlists={allPlaylists} />
-            <DesktopSection playlists={allPlaylists} />
+            <MobileOnlySection playlists={allPlaylists} isArabic={isArabic} />
+            <DesktopSection playlists={allPlaylists} isArabic={isArabic} />
         </>
     )
 }
@@ -48,13 +49,15 @@ export default function PlaylistSection({ sectionText }: { sectionText: SectionT
 // Mobile screen only
 function MobileOnlySection({
     playlists,
+    isArabic
 
 }: {
-    playlists: PlaylistType[]
+    playlists: PlaylistType[],
+    isArabic: boolean
 }) {
     return (
         <>
-            <div className="grid grid-flow-col auto-cols-[minmax(170px,1fr)] gap-x-3 w-screen sm:hidden overflow-x-scroll no-scrollbar -mx-3 px-6">
+            <div dir={isArabic ? "rtl" : "ltr"} className={`grid grid-flow-col ${isArabic ? "[direction:ltr]" : null} auto-cols-[minmax(170px,1fr)] gap-x-3 w-screen sm:hidden overflow-x-scroll no-scrollbar -mx-3 px-6`}>
                 {playlists?.map((playlist) => (
                     <Playlist key={playlist.id} playlist={playlist} />
                 ))}
@@ -68,15 +71,18 @@ function MobileOnlySection({
 // SM screen and above
 function DesktopSection({
     playlists,
+    isArabic
 }: {
-    playlists: PlaylistType[]
+    playlists: PlaylistType[],
+    isArabic: boolean
 }) {
     return (
-        <div className="mb-5 hidden sm:block">
+        <div dir={isArabic ? "rtl" : "ltr"} className="mb-5 hidden sm:block">
             <Carousel
                 opts={{
                     align: "start",
                     slidesToScroll: 3,
+                    direction: isArabic ? "rtl" : "ltr"
                 }}
                 className="w-full"
             >

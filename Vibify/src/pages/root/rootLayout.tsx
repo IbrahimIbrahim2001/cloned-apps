@@ -3,10 +3,13 @@ import { Outlet } from "react-router";
 import AppSidebar from "./components/appSidebar";
 import DialogProvider from "./services/Home/context/dialogContext";
 import { AddTrackToPlaylistDialog } from "./components/addTrackToPlaylistDialog";
+import { useTranslation } from "react-i18next";
 
 export default function RootLayout() {
+    const { i18n } = useTranslation();
+    const isArabic = i18n.language === 'ar';
     return (
-        <div className="select-none">
+        <div dir={isArabic ? "rtl" : "ltr"} className="select-none">
             <DialogProvider>
                 <AddTrackToPlaylistDialog />
                 <SidebarProvider>

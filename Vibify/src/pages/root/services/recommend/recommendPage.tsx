@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import RecommendedTrack from "./components/recommendedTrack";
 import useGetRecommendedTracks from "./hooks/useGetRecommendedTracks";
+import { Loader2 } from 'lucide-react';
 export default function RecommendPage() {
     const { data, isLoading, isFetching, error, isError,
         refetch } = useGetRecommendedTracks();
@@ -20,7 +21,7 @@ export default function RecommendPage() {
                         disabled={isLoading || isFetching && !isError}
                         className="px-8 py-3 text-lg"
                     >
-                        {(isLoading || isFetching) ? 'Generating...' : 'Get 10 Recommended Tracks'}
+                        {(isLoading || isFetching) ? <>'Generating' < Loader2 className="animate-spin" /> </> : 'Get 10 Recommended Tracks'}
                     </Button>
 
                     {error && (

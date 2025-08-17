@@ -13,7 +13,8 @@ import { useTranslation } from "react-i18next"
 export default function Section({ sectionText }: { sectionText: SectionText }) {
     const { data: tracks, isLoading, error } = useGetTracks(sectionText)
     const { playTrack } = useMusic()
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const isArabic = i18n.language === 'ar';
     const handleTrackClick = (track: Track) => {
         if (!tracks) return
         playTrack(track, tracks)
@@ -29,7 +30,7 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
         toast.error("Please, use VPN if you are on Syria")
         return (
             <>
-                <div className="p-4">
+                <div dir={isArabic ? "rtl" : "ltr"} className="p-4">
                     <p className="text-destructive">Error loading {t(sectionText)}</p>
                 </div>
             </>
@@ -39,7 +40,7 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
     if (isLoading) {
         return (
             <>
-                <p className="text-xl px-3">{t(sectionText)}</p>
+                <p dir={isArabic ? "rtl" : "ltr"} className="text-xl px-3">{t(sectionText)}</p>
                 <SkeletonComponent />
             </>
         )
@@ -49,7 +50,7 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
 
     return (
         <>
-            <div className="flex items-center justify-between px-3">
+            <div dir={isArabic ? "rtl" : "ltr"} className="flex items-center justify-between px-3">
                 <p className="text-xl font-semibold">{t(sectionText)}</p>
                 <div className="flex gap-2">
                     <Button variant="outline" size="sm" onClick={handlePlayAll} className="gap-2">
@@ -58,8 +59,8 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
                     </Button>
                 </div>
             </div>
-            <MobileOnlySection tracks={tracks} onTrackClick={handleTrackClick} />
-            <DesktopSection tracks={tracks} onTrackClick={handleTrackClick} />
+            <MobileOnlySection tracks={tracks} onTrackClick={handleTrackClick} isArabic={isArabic} />
+            <DesktopSection tracks={tracks} onTrackClick={handleTrackClick} isArabic={isArabic} />
         </>
     )
 }
@@ -68,12 +69,14 @@ export default function Section({ sectionText }: { sectionText: SectionText }) {
 function MobileOnlySection({
     tracks,
     onTrackClick,
+    isArabic
 }: {
     tracks: Track[]
-    onTrackClick: (track: Track) => void
+    onTrackClick: (track: Track) => void,
+    isArabic: boolean
 }) {
     return (
-        <div className="grid grid-flow-col auto-cols-[minmax(170px,1fr)] gap-x-3 w-screen sm:hidden overflow-x-scroll no-scrollbar -mx-3 px-6">
+        <div dir={isArabic ? "rtl" : "ltr"} className="grid grid-flow-col auto-cols-[minmax(170px,1fr)] gap-x-3 w-screen sm:hidden overflow-x-scroll no-scrollbar -mx-3 px-6">
             {tracks?.map((track, index) => (
                 <TrackComponent key={track.id || index} track={track} onClick={() => onTrackClick(track)} />
             ))}
@@ -85,16 +88,19 @@ function MobileOnlySection({
 function DesktopSection({
     tracks,
     onTrackClick,
+    isArabic
 }: {
     tracks: Track[]
-    onTrackClick: (track: Track) => void
+    onTrackClick: (track: Track) => void,
+    isArabic: boolean
 }) {
     return (
-        <div className="mb-5 hidden sm:block">
+        <div dir={isArabic ? "rtl" : "ltr"} className="mb-5 hidden sm:block">
             <Carousel
                 opts={{
                     align: "start",
                     slidesToScroll: 3,
+                    direction: isArabic ? "rtl" : "ltr"
                 }}
                 className="w-full"
             >
