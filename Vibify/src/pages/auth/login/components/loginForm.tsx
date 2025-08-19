@@ -70,7 +70,7 @@ export default function LoginForm() {
                     </div>
                     <div className="flex justify-between items-start">
                         <Link to="../forget-password">
-                            <Button type="button" disabled variant="link" className="text-sm opacity-75 -ml-3">Forget password</Button>
+                            <Button type="button" variant="link" className="text-sm opacity-75 -ml-3">Forget password</Button>
                         </Link>
                         <AuthButton text="Log in" isSubmitting={form.formState.isSubmitting} />
                     </div>

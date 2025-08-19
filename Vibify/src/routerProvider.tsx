@@ -24,6 +24,7 @@ import PinsPage from "./pages/root/services/pins/pinsPage"
 import SavedPage from "./pages/root/services/saved/savedPage"
 import SearchPage from "./pages/root/search/searchPage"
 import RecommendPage from "./pages/root/services/recommend/recommendPage"
+import UpdatePasswordPage from "./pages/auth/updatePassword/updatePasswordPage"
 
 export default function RouterProvider() {
     return (
@@ -39,6 +40,7 @@ export default function RouterProvider() {
                         <Route path="name" element={<OnboardingNamePage />} />
                     </Route>
                     <Route path="forget-password" element={<ForgetPassword />} />
+                    <Route path="update-password" element={<UpdatePasswordPage />} />
                 </Route>
                 {/* Protected Routes */}
                 <Route element={<ProtectedRoutesWrapper />}>

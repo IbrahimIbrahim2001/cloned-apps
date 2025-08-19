@@ -49,7 +49,6 @@ export default function SettingsPage() {
                     <div className="flex gap-x-2 items-center">
                         {languagesList.map(ele => (
                             <Button key={ele.key} variant={isActiveLang === ele.key ? "secondary" : "ghost"} onClick={() => handleLanguage(ele.key)}
-                            // disabled={ele.key === "ar"}
                             >
                                 <ReactCountryFlag
                                     countryCode={ele.flag}

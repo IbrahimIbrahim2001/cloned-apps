@@ -41,6 +41,7 @@ export default function SessionWrapper() {
             "/signup/password",
             "/signup/name",
             "/forget-password",
+            "/update-password"
         ]
 
         if (publicRoutes.includes(location.pathname)) {
