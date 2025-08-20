@@ -40,7 +40,6 @@ export default function UpdatePasswordPage() {
         },
     })
 
-
     useEffect(() => {
         if (!location.hash) navigate("../login")
     }, [location.hash, navigate])

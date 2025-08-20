@@ -33,6 +33,8 @@
     "pin":"pin",
     "download":"download",
     "Share":"Share",
-    "remove from history":"remove from history"
-
+    "remove from history":"remove from history",
+    "Upload Profile Picture": "Upload Profile Picture",
+    "upload-description":"Choose an image to set as your profile picture",
+    "Profile Picture": "Profile Picture"
 }

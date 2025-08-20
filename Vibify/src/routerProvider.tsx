@@ -1,20 +1,23 @@
 import { Route, Routes } from "react-router"
+//protection and sessions
 import ProtectedRoutesWrapper from "./layout/protectedRoutesWrapper"
 import SessionWrapper from "./layout/sessionWrapper"
+//layouts
+import RootLayout from "./pages/root/rootLayout"
 import AuthLayout from "./pages/auth/authLayout"
+import SignupLayout from "./pages/auth/signup/signupLayout"
+import ServicesLayout from "./pages/root/services/servicesLayout"
+//pages
 import ForgetPassword from "./pages/auth/forget-password/forget-password"
 import LoginPage from "./pages/auth/login/loginPage"
 import OnboardingEmailPage from "./pages/auth/signup/email/onboardingEmailPage"
 import OnboardingNamePage from "./pages/auth/signup/name/onboardingNamePage"
 import OnboardingPasswordPage from "./pages/auth/signup/password/onboardingPasswordPage"
-import SignupLayout from "./pages/auth/signup/signupLayout"
 import LibraryPage from "./pages/root/library/libraryPage"
-import RootLayout from "./pages/root/rootLayout"
 import HomePage from "./pages/root/services/Home/home"
 import { LikedTracksPage } from "./pages/root/services/liked tracks/likedTracksPage"
 import { PlaylistPage } from "./pages/root/services/playlists/playlist/playlistPage"
 import PlaylistsPage from "./pages/root/services/playlists/playlistsPage"
-import ServicesLayout from "./pages/root/services/servicesLayout"
 import SettingsPage from "./pages/root/settings/settingsPage"
 import TrackDetailsPage from "./pages/root/trackDetails/trackDetailsPage"
 import Start from "./pages/start/start"
@@ -25,7 +28,6 @@ import SavedPage from "./pages/root/services/saved/savedPage"
 import SearchPage from "./pages/root/search/searchPage"
 import RecommendPage from "./pages/root/services/recommend/recommendPage"
 import UpdatePasswordPage from "./pages/auth/updatePassword/updatePasswordPage"
-
 export default function RouterProvider() {
     return (
         <Routes>

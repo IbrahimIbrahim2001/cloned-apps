@@ -35,5 +35,8 @@
     "pin":"تثبيت",
     "download":"تحميل",
     "Share":"مشاركة",
-    "remove from history":"إزالة من السجل"
+    "remove from history":"إزالة من السجل",
+    "Upload Profile Picture": "رفع صورة الملف الشخصي",
+    "upload-description":"اختر صورة لتعيينها كصورة ملفك الشخصي",
+    "Profile Picture": "صورة الملف الشخصي"
 }

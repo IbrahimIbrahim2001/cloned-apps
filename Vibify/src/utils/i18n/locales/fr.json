@@ -35,5 +35,8 @@
     "pin":"épingler",
     "download":"télécharger",
     "Share":"Partager",
-    "remove from history":"supprimer de l'historique"
+    "remove from history":"supprimer de l'historique",
+    "Upload Profile Picture": "Télécharger une photo de profil",
+    "upload-description":"Choisissez une image à définir comme photo de profil",
+    "Profile Picture": "Photo de profil"
 }
