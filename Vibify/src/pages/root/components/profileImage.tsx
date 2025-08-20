@@ -5,7 +5,7 @@ export default function ProfileImage() {
     const { data: result, isLoading } = useProfileImage();
     return (
         <div>
-            {isLoading ?
+            {result && result.error || isLoading ?
                 <CircleUser className="ml-2 size-6 rounded-full" />
                 :
                 <>

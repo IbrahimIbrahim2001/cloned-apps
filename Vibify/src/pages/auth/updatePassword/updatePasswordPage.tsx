@@ -45,25 +45,25 @@ export default function UpdatePasswordPage() {
     }, [location.hash, navigate])
 
     const onSubmit = async (formData: z.infer<typeof FormSchema>) => {
-        if (!location.hash)
-            try {
-                const { email, password } = formData
-                const result = await updatePassword(email, password)
-                if (result.success) {
-                    toast.custom(() => (
-                        <Alert className="border-green-600 text-green-600 dark:border-green-400 dark:text-green-400">
-                            <CheckCheckIcon />
-                            <AlertTitle>Password updated successfully!</AlertTitle>
-                        </Alert>
-                    ))
-                    navigate("/login")
-                } else {
-                    toast.error("Failed to update password")
-                }
-            } catch (error) {
-                console.log(error);
-                toast.error("An unexpected error occurred")
+        try {
+            const { email, password } = formData
+            const result = await updatePassword(email, password)
+            console.log(result) // auth session messing
+            if (result.success) {
+                toast.custom(() => (
+                    <Alert className="border-green-600 text-green-600 dark:border-green-400 dark:text-green-400">
+                        <CheckCheckIcon />
+                        <AlertTitle>Password updated successfully!</AlertTitle>
+                    </Alert>
+                ))
+                navigate("/login")
+            } else {
+                toast.error("Failed to update password")
             }
+        } catch (error) {
+            console.log(error);
+            toast.error("An unexpected error occurred")
+        }
     }
 
     return (

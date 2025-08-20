@@ -1,8 +1,19 @@
 import VibifyLogo from "@/components/shared/vibifyLogo";
 import { Button } from "@/components/ui/button";
+import supabase from "@/lib/supabase-client";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
 export default function Start() {
+
+    const handleSignWithGoogle = async () => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            // options: {
+            //     redirectTo: 'https://example.com/welcome'
+            // }
+        })
+    }
+
     return (
         <>
             <div className="h-svh px-12 sm:pt-32 flex flex-col justify-center sm:justify-start">
@@ -16,7 +27,7 @@ export default function Start() {
                     <Link to="/signup/email" className="w-full sm:w-56">
                         <Button className="w-full bg-primary rounded-[45px]">Sign up for free</Button>
                     </Link>
-                    <Button variant="outline" disabled className="flex justify-start w-full sm:w-56 bg-transparent rounded-[45px]">
+                    <Button onClick={handleSignWithGoogle} variant="outline" className="flex justify-start w-full sm:w-56 bg-transparent rounded-[45px]">
                         <FcGoogle />
                         <p className="justify-self-center w-full">
                             Continue with google
