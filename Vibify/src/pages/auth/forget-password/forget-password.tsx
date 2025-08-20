@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { resetPasswordWithEmail } from './api/resetPasswordWithEmail'
+import AuthHeader from '../components/authHeader'
 
 const FormSchema = z.object({
     email: z.string().min(1, 'Email is required').email({ message: 'Please enter a valid email address.' })
@@ -42,26 +43,31 @@ export default function ForgetPassword() {
     }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='w-full max-w-xs space-y-6'>
-                <FormField
-                    control={form.control}
-                    name='email'
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Reset Your Password:</FormLabel>
-                            <FormControl>
-                                <Input placeholder='Email address' {...field} />
-                            </FormControl>
-                            <FormDescription>Enter your email address to receive a reset link.</FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+        <>
+            <div className="flex flex-col space-y-2">
+                <AuthHeader text="Forget password" />
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className='w-full max-w-xs space-y-6'>
+                        <FormField
+                            control={form.control}
+                            name='email'
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Reset Your Password:</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder='Email address' {...field} />
+                                    </FormControl>
+                                    <FormDescription>Enter your email address to receive a reset link.</FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                <Button type='submit'>Send Link</Button>
-            </form>
-        </Form>
+                        <Button type='submit'>Send Link</Button>
+                    </form>
+                </Form>
+            </div>
+        </>
     )
 }
 
