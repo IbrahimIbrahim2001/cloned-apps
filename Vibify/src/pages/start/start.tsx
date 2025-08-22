@@ -6,6 +6,7 @@ import supabase from "@/lib/supabase-client";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
 import { toast } from "sonner";
+
 export default function Start() {
 
     const handleSignWithGoogle = async () => {

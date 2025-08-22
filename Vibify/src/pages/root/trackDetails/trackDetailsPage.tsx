@@ -13,7 +13,6 @@ import { Track } from "../types/track"
 import { getImageUrl } from "../utils/getTrackImage"
 import { getTrackTitle } from "../utils/getTrackTitle"
 
-
 export default function TrackDetailsPage() {
     const { track, isMuted, isPlaying, isShuffled, setMusic,
         isRepeating, togglePlay, playNext, playPrevious, toggleShuffle,

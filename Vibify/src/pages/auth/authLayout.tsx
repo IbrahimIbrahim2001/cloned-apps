@@ -20,7 +20,8 @@ export default function AuthLayout() {
             <div className="absolute inset-0  flex items-center justify-center z-0 opacity-10">
                 <VibifyLogo width="300" height="300" />
             </div>
-            <div className="w-full h-svh z-10 sm:flex items-start sm:justify-center pt-20 sm:pt-32 px-4 sm:px-0">
+            <div
+                className="w-full h-svh z-10 sm:flex items-start sm:justify-center pt-20 sm:pt-32 px-4 sm:px-0">
                 <Outlet />
             </div>
         </div>
