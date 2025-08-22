@@ -19,7 +19,6 @@ export default function Start() {
 
     return (
         <>
-
             <div className="h-svh px-12 sm:pt-32 flex flex-col justify-center sm:justify-start">
                 <ShootingStars />
                 <StarsBackground />
