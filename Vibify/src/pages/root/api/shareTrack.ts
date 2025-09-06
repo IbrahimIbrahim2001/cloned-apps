@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.DEV ? "localhost:5173" : "blah blah"
+const baseUrl = import.meta.env.DEV ? "localhost:5173" : "https://vibify-chi.vercel.app"
 export const shareTrack = async (trackTitle: string | undefined) => {
 
     if (trackTitle) {

@@ -86,8 +86,8 @@ export default defineConfig({
           "type": "image/png"
         }
       ],
-      theme_color: "fff",
-      background_color: "fff",
+      theme_color: "1b1b1b",
+      background_color: "1b1b1b",
       start_url: "/",
       display: "standalone",
       orientation: "portrait"
